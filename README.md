@@ -45,7 +45,7 @@ Here is the folder structure of this app.
 
 <!--- FOLDER_STRUCTURE_START --->
 ```bash
-space-portfolio/
+hao-liu-personal-website/
   |- app/
     |-- apple-icon.png
     |-- favicon.ico
@@ -68,7 +68,6 @@ space-portfolio/
   |- .eslintrc.json
   |- .gitignore
   |- eslint.config.mjs
-  |- netlify.toml
   |- next.config.js
   |- package-lock.json
   |- package.json
@@ -134,6 +133,7 @@ Useful resources and dependencies that are used in Space Portfolio.
 - [react-dom](https://www.npmjs.com/package/react-dom): 19.2.4
 - [react-icons](https://www.npmjs.com/package/react-icons): ^5.6.0
 - [react-intersection-observer](https://www.npmjs.com/package/react-intersection-observer): ^10.0.3
+- [react-type-animation](https://www.npmjs.com/package/react-type-animation): ^3.2.0
 - [tailwind-merge](https://www.npmjs.com/package/tailwind-merge): ^3.5.0
 - [tailwindcss](https://www.npmjs.com/package/tailwindcss): ^3.3.0
 - [three](https://www.npmjs.com/package/three): ^0.183.2
