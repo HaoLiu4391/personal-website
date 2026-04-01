@@ -14,7 +14,9 @@ interface Neuron {
   activationTarget: number;
   pulsePhase: number;
   connections: number[];
-  hue: number; // color variation
+  hue: number;
+  // Memory trace: neurons that fired together strengthen
+  coActivation: Map<number, number>;
 }
 
 interface Signal {
@@ -24,6 +26,7 @@ interface Signal {
   speed: number;
   intensity: number;
   trail: { x: number; y: number; alpha: number }[];
+  generation: number; // how many hops from origin
 }
 
 interface Ripple {
@@ -34,12 +37,49 @@ interface Ripple {
   alpha: number;
 }
 
+// Hebbian trace — a fading "memory" line between co-activated neurons
+interface HebbianTrace {
+  i: number;
+  j: number;
+  strength: number;
+  age: number;
+}
+
+// Floating cognitive science terms
+interface FloatingWord {
+  text: string;
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  alpha: number;
+  targetAlpha: number;
+  size: number;
+  life: number;
+}
+
+const COGNITIVE_TERMS = [
+  "memory", "attention", "perception", "consciousness",
+  "encoding", "retrieval", "hippocampus", "neocortex",
+  "synapse", "plasticity", "Hebbian", "binding",
+  "oscillation", "gamma", "theta", "schema",
+  "prediction", "inference", "Bayesian", "prior",
+  "representation", "latent", "manifold", "embedding",
+  "emergence", "self-organization", "attractor", "basin",
+  "entropy", "free energy", "surprise", "belief",
+  "agency", "reward", "exploration", "policy",
+  "Theory of Mind", "intention", "mentalizing",
+  "diffusion", "generative", "compression",
+];
+
 export const NeuralBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const mouseRef = useRef({ x: -1000, y: -1000, clicked: false });
+  const mouseRef = useRef({ x: -1000, y: -1000 });
   const neuronsRef = useRef<Neuron[]>([]);
   const signalsRef = useRef<Signal[]>([]);
   const ripplesRef = useRef<Ripple[]>([]);
+  const hebbianRef = useRef<HebbianTrace[]>([]);
+  const wordsRef = useRef<FloatingWord[]>([]);
   const animRef = useRef<number>(0);
   const timeRef = useRef(0);
 
@@ -68,7 +108,6 @@ export const NeuralBackground = () => {
     const CONNECTION_DIST = 200;
     const MOUSE_RADIUS = 250;
 
-    // Initialize neurons
     const neurons: Neuron[] = Array.from({ length: NEURON_COUNT }, (_, i) => {
       const layer = i < 25 ? 0 : i < 65 ? 1 : 2;
       const baseRadius = layer === 0 ? 1.5 : layer === 1 ? 2.5 : 2;
@@ -84,12 +123,12 @@ export const NeuralBackground = () => {
         activationTarget: 0,
         pulsePhase: Math.random() * Math.PI * 2,
         connections: [],
-        hue: 30 + Math.random() * 20, // amber range 30-50
+        hue: 30 + Math.random() * 20,
+        coActivation: new Map(),
       };
     });
     neuronsRef.current = neurons;
 
-    // Build connections
     for (let i = 0; i < neurons.length; i++) {
       const dists: { idx: number; d: number }[] = [];
       for (let j = 0; j < neurons.length; j++) {
@@ -103,40 +142,40 @@ export const NeuralBackground = () => {
     }
 
     const handleMouse = (e: MouseEvent) => {
-      mouseRef.current.x = e.clientX;
-      mouseRef.current.y = e.clientY;
+      mouseRef.current = { x: e.clientX, y: e.clientY };
     };
 
     const handleClick = (e: MouseEvent) => {
-      // Spawn a burst of signals from click point
       const cx = e.clientX;
       const cy = e.clientY;
 
-      // Ripple effect
-      ripplesRef.current.push({
+      ripplesRef.current.push({ x: cx, y: cy, radius: 0, maxRadius: 350, alpha: 0.6 });
+
+      // Spawn a floating word at click
+      const term = COGNITIVE_TERMS[Math.floor(Math.random() * COGNITIVE_TERMS.length)];
+      wordsRef.current.push({
+        text: term,
         x: cx,
         y: cy,
-        radius: 0,
-        maxRadius: 300,
-        alpha: 0.6,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: -0.3 - Math.random() * 0.5,
+        alpha: 0,
+        targetAlpha: 0.6,
+        size: 12 + Math.random() * 6,
+        life: 200 + Math.random() * 150,
       });
 
-      // Activate and fire nearby neurons
       for (const n of neurons) {
         const dx = cx - n.x;
         const dy = cy - n.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
         if (dist < 200) {
           n.activationTarget = 1;
-          // Fire signals from this neuron
           for (const ci of n.connections) {
             signalsRef.current.push({
-              from: neurons.indexOf(n),
-              to: ci,
-              progress: 0,
-              speed: 0.015 + Math.random() * 0.01,
-              intensity: 1 - dist / 200,
-              trail: [],
+              from: neurons.indexOf(n), to: ci,
+              progress: 0, speed: 0.015 + Math.random() * 0.01,
+              intensity: 1 - dist / 200, trail: [], generation: 0,
             });
           }
         }
@@ -148,18 +187,35 @@ export const NeuralBackground = () => {
     window.addEventListener("mousemove", handleMouse);
     canvas.addEventListener("click", handleClick);
 
+    // Periodically spawn floating words near active neurons
+    const spawnWord = () => {
+      const activeNeurons = neurons.filter((n) => n.activation > 0.5);
+      if (activeNeurons.length === 0) return;
+      const n = activeNeurons[Math.floor(Math.random() * activeNeurons.length)];
+      const term = COGNITIVE_TERMS[Math.floor(Math.random() * COGNITIVE_TERMS.length)];
+      wordsRef.current.push({
+        text: term,
+        x: n.x + (Math.random() - 0.5) * 40,
+        y: n.y + (Math.random() - 0.5) * 40,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: -0.2 - Math.random() * 0.3,
+        alpha: 0,
+        targetAlpha: 0.35,
+        size: 10 + Math.random() * 4,
+        life: 150 + Math.random() * 100,
+      });
+    };
+
     const spawnSignal = () => {
-      const fromIdx = Math.floor(Math.random() * neurons.length);
-      const n = neurons[fromIdx];
+      const idx = Math.floor(Math.random() * neurons.length);
+      const n = neurons[idx];
       if (n.connections.length === 0) return;
       const toIdx = n.connections[Math.floor(Math.random() * n.connections.length)];
       signalsRef.current.push({
-        from: fromIdx,
-        to: toIdx,
-        progress: 0,
+        from: idx, to: toIdx, progress: 0,
         speed: 0.006 + Math.random() * 0.01,
         intensity: 0.5 + Math.random() * 0.5,
-        trail: [],
+        trail: [], generation: 0,
       });
     };
 
@@ -169,7 +225,7 @@ export const NeuralBackground = () => {
       ctx.resetTransform();
       ctx.scale(dpr, dpr);
 
-      // Semi-transparent clear for motion blur effect
+      // Motion blur
       ctx.fillStyle = "rgba(10, 10, 15, 0.15)";
       ctx.fillRect(0, 0, cw, ch);
 
@@ -178,17 +234,15 @@ export const NeuralBackground = () => {
       const mouse = mouseRef.current;
       const signals = signalsRef.current;
       const ripples = ripplesRef.current;
+      const hebbian = hebbianRef.current;
+      const words = wordsRef.current;
 
-      // --- Update & draw ripples ---
+      // --- Ripples ---
       for (let i = ripples.length - 1; i >= 0; i--) {
         const r = ripples[i];
         r.radius += 4;
         r.alpha *= 0.97;
-
-        if (r.alpha < 0.01 || r.radius > r.maxRadius) {
-          ripples.splice(i, 1);
-          continue;
-        }
+        if (r.alpha < 0.01) { ripples.splice(i, 1); continue; }
 
         ctx.beginPath();
         ctx.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
@@ -196,7 +250,6 @@ export const NeuralBackground = () => {
         ctx.lineWidth = 2;
         ctx.stroke();
 
-        // Inner ring
         ctx.beginPath();
         ctx.arc(r.x, r.y, r.radius * 0.6, 0, Math.PI * 2);
         ctx.strokeStyle = `hsla(38, 92%, 70%, ${r.alpha * 0.5})`;
@@ -209,14 +262,12 @@ export const NeuralBackground = () => {
         n.pulsePhase += 0.015 + n.activation * 0.02;
         const pulse = Math.sin(n.pulsePhase) * 0.2 + 0.8;
 
-        // Mouse interaction
         const mdx = mouse.x - n.x;
         const mdy = mouse.y - n.y;
         const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
 
         if (mdist < MOUSE_RADIUS && mdist > 0) {
-          const force = (1 - mdist / MOUSE_RADIUS);
-          // Repel close neurons, attract distant ones
+          const force = 1 - mdist / MOUSE_RADIUS;
           if (mdist < 80) {
             n.vx -= (mdx / mdist) * force * 0.08;
             n.vy -= (mdy / mdist) * force * 0.08;
@@ -227,35 +278,68 @@ export const NeuralBackground = () => {
           n.activationTarget = Math.min(1, n.activationTarget + force * 0.08);
         }
 
-        // Random firing
-        if (Math.random() < 0.003) {
-          n.activationTarget = 0.4 + Math.random() * 0.6;
-        }
+        if (Math.random() < 0.003) n.activationTarget = 0.4 + Math.random() * 0.6;
 
-        // Activation dynamics
         n.activation += (n.activationTarget - n.activation) * 0.06;
         n.activationTarget *= 0.97;
         n.radius = n.baseRadius + n.activation * 3 * pulse;
 
-        // Movement
         n.x += n.vx;
         n.y += n.vy;
         n.vx *= 0.993;
         n.vy *= 0.993;
 
-        // Soft boundary
         const m = 30;
         if (n.x < m) n.vx += 0.03;
         if (n.x > cw - m) n.vx -= 0.03;
         if (n.y < m) n.vy += 0.03;
         if (n.y > ch - m) n.vy -= 0.03;
+
+        // Decay co-activation memory
+        for (const [key, val] of n.coActivation) {
+          n.coActivation.set(key, val * 0.999);
+          if (val < 0.01) n.coActivation.delete(key);
+        }
       }
 
-      // --- Spawn signals ---
+      // --- Spawn signals & words ---
       if (Math.random() < 0.1) spawnSignal();
+      if (Math.random() < 0.008) spawnWord();
 
-      // --- Draw connections ---
-      // Proximity connections (faint web)
+      // --- Draw Hebbian traces (memory bonds) ---
+      for (let i = hebbian.length - 1; i >= 0; i--) {
+        const h = hebbian[i];
+        h.strength *= 0.997;
+        h.age++;
+        if (h.strength < 0.02) { hebbian.splice(i, 1); continue; }
+
+        const a = neurons[h.i];
+        const b = neurons[h.j];
+        const dx = a.x - b.x;
+        const dy = a.y - b.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist > 500) continue;
+
+        // Pulsing Hebbian connection
+        const pAlpha = h.strength * (0.8 + Math.sin(t * 2 + h.age * 0.1) * 0.2);
+
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(b.x, b.y);
+        ctx.strokeStyle = `hsla(50, 100%, 70%, ${pAlpha * 0.3})`;
+        ctx.lineWidth = h.strength * 3;
+        ctx.stroke();
+
+        // Wider glow
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(b.x, b.y);
+        ctx.strokeStyle = `hsla(45, 95%, 60%, ${pAlpha * 0.08})`;
+        ctx.lineWidth = h.strength * 10;
+        ctx.stroke();
+      }
+
+      // --- Proximity connections ---
       for (let i = 0; i < neurons.length; i++) {
         for (let j = i + 1; j < neurons.length; j++) {
           const dx = neurons[i].x - neurons[j].x;
@@ -273,7 +357,7 @@ export const NeuralBackground = () => {
         }
       }
 
-      // Stable curved connections (brighter)
+      // --- Stable curved connections ---
       for (let i = 0; i < neurons.length; i++) {
         const n = neurons[i];
         for (const ci of n.connections) {
@@ -292,7 +376,6 @@ export const NeuralBackground = () => {
           const cy1 = (n.y + target.y) / 2 + Math.cos(t * 0.3 + n.pulsePhase) * 20;
           ctx.quadraticCurveTo(cx1, cy1, target.x, target.y);
 
-          // Active connections glow brighter
           if (avgAct > 0.3) {
             ctx.strokeStyle = `hsla(40, 90%, 60%, ${alpha * 2})`;
             ctx.lineWidth = 1.5;
@@ -304,24 +387,49 @@ export const NeuralBackground = () => {
         }
       }
 
-      // --- Draw & update signals ---
+      // --- Signals with comet trails ---
       for (let i = signals.length - 1; i >= 0; i--) {
         const s = signals[i];
         s.progress += s.speed;
 
         if (s.progress >= 1) {
-          neurons[s.to].activationTarget = Math.min(1, neurons[s.to].activationTarget + 0.5);
-          if (Math.random() < 0.35) {
-            const next = neurons[s.to];
+          const targetN = neurons[s.to];
+          targetN.activationTarget = Math.min(1, targetN.activationTarget + 0.5);
+
+          // Hebbian learning: "neurons that fire together wire together"
+          const fromN = neurons[s.from];
+          if (fromN.activation > 0.3 && targetN.activation > 0.3) {
+            fromN.coActivation.set(s.to, Math.min(1, (fromN.coActivation.get(s.to) || 0) + 0.3));
+            // Record Hebbian trace
+            const existing = hebbian.find(
+              (h) => (h.i === s.from && h.j === s.to) || (h.i === s.to && h.j === s.from)
+            );
+            if (existing) {
+              existing.strength = Math.min(1, existing.strength + 0.15);
+            } else {
+              hebbian.push({ i: s.from, j: s.to, strength: 0.3, age: 0 });
+            }
+          }
+
+          // Cascade
+          if (Math.random() < 0.35 && s.generation < 5) {
+            const next = targetN;
             if (next.connections.length > 0) {
-              const nextTo = next.connections[Math.floor(Math.random() * next.connections.length)];
+              // Prefer connections with Hebbian strengthening
+              let bestConn = next.connections[Math.floor(Math.random() * next.connections.length)];
+              let bestStrength = 0;
+              for (const ci of next.connections) {
+                const str = next.coActivation.get(ci) || 0;
+                if (str > bestStrength && Math.random() < 0.7) {
+                  bestStrength = str;
+                  bestConn = ci;
+                }
+              }
               signals.push({
-                from: s.to,
-                to: nextTo,
-                progress: 0,
+                from: s.to, to: bestConn, progress: 0,
                 speed: s.speed * (0.85 + Math.random() * 0.3),
                 intensity: s.intensity * 0.65,
-                trail: [],
+                trail: [], generation: s.generation + 1,
               });
             }
           }
@@ -334,11 +442,9 @@ export const NeuralBackground = () => {
         const px = fromN.x + (toN.x - fromN.x) * s.progress;
         const py = fromN.y + (toN.y - fromN.y) * s.progress;
 
-        // Add to trail
         s.trail.push({ x: px, y: py, alpha: s.intensity });
         if (s.trail.length > 12) s.trail.shift();
 
-        // Draw trail (comet effect)
         for (let ti = 0; ti < s.trail.length; ti++) {
           const tp = s.trail[ti];
           const trailAlpha = (ti / s.trail.length) * tp.alpha * 0.4;
@@ -349,7 +455,6 @@ export const NeuralBackground = () => {
           ctx.fill();
         }
 
-        // Signal head glow
         const glowSize = 5 * s.intensity;
         const grad = ctx.createRadialGradient(px, py, 0, px, py, glowSize * 4);
         grad.addColorStop(0, `hsla(45, 100%, 80%, ${0.9 * s.intensity})`);
@@ -360,7 +465,6 @@ export const NeuralBackground = () => {
         ctx.fillStyle = grad;
         ctx.fill();
 
-        // Bright core
         ctx.beginPath();
         ctx.arc(px, py, glowSize * 0.6, 0, Math.PI * 2);
         ctx.fillStyle = `hsla(48, 100%, 90%, ${s.intensity})`;
@@ -371,7 +475,6 @@ export const NeuralBackground = () => {
       for (const n of neurons) {
         const pulse = Math.sin(n.pulsePhase) * 0.15 + 0.85;
 
-        // Large activation glow
         if (n.activation > 0.15) {
           const glowR = n.radius * (4 + n.activation * 6);
           const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, glowR);
@@ -384,7 +487,6 @@ export const NeuralBackground = () => {
           ctx.fill();
         }
 
-        // Neuron ring (when active)
         if (n.activation > 0.4) {
           ctx.beginPath();
           ctx.arc(n.x, n.y, n.radius * 2.5, 0, Math.PI * 2);
@@ -393,14 +495,12 @@ export const NeuralBackground = () => {
           ctx.stroke();
         }
 
-        // Body
         const bodyAlpha = 0.25 + n.activation * 0.55;
         ctx.beginPath();
         ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
         ctx.fillStyle = `hsla(${n.hue}, 85%, ${50 + n.activation * 15}%, ${bodyAlpha * pulse})`;
         ctx.fill();
 
-        // Bright center dot
         if (n.activation > 0.25) {
           ctx.beginPath();
           ctx.arc(n.x, n.y, n.radius * 0.35, 0, Math.PI * 2);
@@ -409,14 +509,31 @@ export const NeuralBackground = () => {
         }
       }
 
-      // --- Mouse cursor glow ---
+      // --- Floating cognitive words ---
+      for (let i = words.length - 1; i >= 0; i--) {
+        const fw = words[i];
+        fw.x += fw.vx;
+        fw.y += fw.vy;
+        fw.life--;
+        fw.alpha += (fw.targetAlpha - fw.alpha) * 0.05;
+
+        if (fw.life < 40) fw.targetAlpha = 0;
+        if (fw.life <= 0 || fw.alpha < 0.005) { words.splice(i, 1); continue; }
+
+        ctx.font = `${fw.size}px "Inter", sans-serif`;
+        ctx.fillStyle = `hsla(40, 70%, 65%, ${fw.alpha})`;
+        ctx.textAlign = "center";
+        ctx.fillText(fw.text, fw.x, fw.y);
+      }
+
+      // --- Cursor glow ---
       if (mouse.x > 0 && mouse.y > 0) {
-        const cursorGrad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 80);
-        cursorGrad.addColorStop(0, "hsla(38, 90%, 55%, 0.06)");
-        cursorGrad.addColorStop(1, "hsla(38, 90%, 55%, 0)");
+        const cg = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 80);
+        cg.addColorStop(0, "hsla(38, 90%, 55%, 0.06)");
+        cg.addColorStop(1, "hsla(38, 90%, 55%, 0)");
         ctx.beginPath();
         ctx.arc(mouse.x, mouse.y, 80, 0, Math.PI * 2);
-        ctx.fillStyle = cursorGrad;
+        ctx.fillStyle = cg;
         ctx.fill();
       }
 
