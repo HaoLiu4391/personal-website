@@ -1,4 +1,5 @@
 import { About } from "@/components/main/about";
+import { Books } from "@/components/main/books";
 import { CVSection } from "@/components/main/cv-section";
 import { Experience } from "@/components/main/experience";
 import { Hero } from "@/components/main/hero";
@@ -16,6 +17,7 @@ export default function Home() {
         <Publications />
         <Experience />
         <Skills />
+        <Books />
         <CVSection />
       </div>
     </main>

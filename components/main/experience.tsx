@@ -1,15 +1,15 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 import { EXPERIENCES } from "@/constants";
 import { slideInFromLeft } from "@/lib/motion";
 
 export const Experience = () => {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
-  const [expanded, setExpanded] = useState<number | null>(null);
+  const [expanded, setExpanded] = useState<number | null>(0);
 
   return (
     <section id="experience" className="py-20 px-6 md:px-20" ref={ref}>
@@ -40,7 +40,9 @@ export const Experience = () => {
 
               <div
                 className="bg-[#0a0520] border border-[#2A0E61] rounded-xl p-6 hover:border-purple-500/50 transition-all cursor-pointer"
-                onClick={() => setExpanded(expanded === index ? null : index)}
+                onClick={() =>
+                  setExpanded(expanded === index ? null : index)
+                }
               >
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-1 mb-2">
                   <h3 className="text-white text-lg font-semibold">
@@ -55,18 +57,21 @@ export const Experience = () => {
                   {exp.organization}
                 </p>
 
-                <motion.div
-                  initial={false}
-                  animate={{
-                    height: expanded === index ? "auto" : 0,
-                    opacity: expanded === index ? 1 : 0,
-                  }}
-                  className="overflow-hidden"
-                >
-                  <p className="text-gray-400 text-sm leading-relaxed mb-3">
-                    {exp.description}
-                  </p>
-                </motion.div>
+                <AnimatePresence>
+                  {expanded === index && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
+                    >
+                      <p className="text-gray-400 text-sm leading-relaxed mb-3">
+                        {exp.description}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
                 <div className="flex flex-wrap gap-2 mt-2">
                   {exp.tags.map((tag) => (

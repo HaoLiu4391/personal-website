@@ -3,8 +3,9 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
-import { ABOUT_TEXT, TIMELINE } from "@/constants";
+import { ABOUT_TEXT, ABOUT_NEWS, HOBBIES, TIMELINE } from "@/constants";
 import { slideInFromLeft, slideInFromRight } from "@/lib/motion";
+import { HERO_CONTENT } from "@/constants";
 
 export const About = () => {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
@@ -23,12 +24,43 @@ export const About = () => {
           About Me
         </motion.h2>
 
-        <motion.p
-          variants={slideInFromLeft(0.4)}
-          className="text-gray-300 text-lg leading-relaxed mb-16 max-w-3xl"
+        {/* News Banner */}
+        <motion.div
+          variants={slideInFromLeft(0.3)}
+          className="bg-gradient-to-r from-purple-500/10 to-cyan-500/10 border border-purple-500/30 rounded-xl p-4 mb-8"
         >
-          {ABOUT_TEXT}
-        </motion.p>
+          <span className="text-yellow-400 font-bold mr-2">News!!!</span>
+          <span className="text-gray-300">{ABOUT_NEWS}</span>
+        </motion.div>
+
+        {/* Bio */}
+        <motion.div
+          variants={slideInFromLeft(0.4)}
+          className="text-gray-300 text-base leading-relaxed mb-6 max-w-4xl space-y-4"
+        >
+          {ABOUT_TEXT.split("\n\n").map((paragraph, i) => (
+            <p key={i}>{paragraph}</p>
+          ))}
+        </motion.div>
+
+        {/* Chinese Motto */}
+        <motion.div
+          variants={slideInFromLeft(0.5)}
+          className="mb-8"
+        >
+          <p className="text-purple-300/60 italic text-sm">
+            &ldquo;{HERO_CONTENT.chineseMotto}&rdquo;
+          </p>
+        </motion.div>
+
+        {/* Hobbies */}
+        <motion.div
+          variants={slideInFromLeft(0.5)}
+          className="mb-16"
+        >
+          <span className="text-gray-500 text-sm">Hobbies: </span>
+          <span className="text-gray-400 text-sm">{HOBBIES}</span>
+        </motion.div>
 
         {/* Timeline */}
         <motion.h3
@@ -39,45 +71,45 @@ export const About = () => {
         </motion.h3>
 
         <div className="relative">
-          {/* Vertical line */}
           <div className="absolute left-[22px] md:left-1/2 md:-translate-x-[1px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-purple-500 to-cyan-500 opacity-30" />
 
           {TIMELINE.map((item, index) => (
             <motion.div
               key={item.year}
-              variants={index % 2 === 0 ? slideInFromLeft(0.3 + index * 0.2) : slideInFromRight(0.3 + index * 0.2)}
-              className={`relative flex flex-col md:flex-row items-start mb-12 ${
+              variants={
+                index % 2 === 0
+                  ? slideInFromLeft(0.3 + index * 0.1)
+                  : slideInFromRight(0.3 + index * 0.1)
+              }
+              className={`relative flex flex-col md:flex-row items-start mb-10 ${
                 index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
               }`}
             >
-              {/* Content */}
               <div
                 className={`ml-14 md:ml-0 md:w-[45%] ${
                   index % 2 === 0 ? "md:pr-12 md:text-right" : "md:pl-12"
                 }`}
               >
-                <div className="bg-[#0a0520] border border-[#2A0E61] rounded-xl p-6 hover:border-purple-500/50 transition-colors">
+                <div className="bg-[#0a0520] border border-[#2A0E61] rounded-xl p-5 hover:border-purple-500/50 transition-colors">
                   <span className="text-purple-400 text-sm font-mono">
                     {item.year}
                   </span>
-                  <h4 className="text-white text-lg font-semibold mt-1">
+                  <h4 className="text-white text-base font-semibold mt-1">
                     {item.title}
                   </h4>
                   <p className="text-cyan-400 text-sm mt-1">
                     {item.institution}
                   </p>
-                  <p className="text-gray-400 text-sm mt-2">
+                  <p className="text-gray-400 text-sm mt-2 leading-relaxed">
                     {item.description}
                   </p>
                 </div>
               </div>
 
-              {/* Center dot */}
-              <div className="absolute left-[14px] md:left-1/2 md:-translate-x-1/2 top-6 w-[18px] h-[18px] rounded-full bg-[#030014] border-2 border-purple-500 flex items-center justify-center z-10">
-                <span className="text-xs">{item.icon}</span>
+              <div className="absolute left-[14px] md:left-1/2 md:-translate-x-1/2 top-5 w-[18px] h-[18px] rounded-full bg-[#030014] border-2 border-purple-500 flex items-center justify-center z-10">
+                <span className="text-[10px]">{item.icon}</span>
               </div>
 
-              {/* Spacer for opposite side */}
               <div className="hidden md:block md:w-[45%]" />
             </motion.div>
           ))}

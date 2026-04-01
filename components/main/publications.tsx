@@ -8,15 +8,29 @@ import Link from "next/link";
 import { PUBLICATIONS } from "@/constants";
 import { slideInFromLeft } from "@/lib/motion";
 
+const renderAuthors = (authors: string) => {
+  const parts = authors.split(/(\*\*.*?\*\*)/g);
+  return parts.map((part, i) => {
+    if (part.startsWith("**") && part.endsWith("**")) {
+      return (
+        <strong key={i} className="text-white font-semibold">
+          {part.slice(2, -2)}
+        </strong>
+      );
+    }
+    return <span key={i}>{part}</span>;
+  });
+};
+
 export const Publications = () => {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
 
   const getBibtex = (pub: (typeof PUBLICATIONS)[number]) => {
-    const key = pub.authors.split(",")[0].trim().replace(/\s/g, "") + pub.year;
+    const key = pub.authors.split(",")[0].trim().replace(/\*|\s/g, "") + pub.year;
     return `@inproceedings{${key},
   title={${pub.title}},
-  author={${pub.authors}},
+  author={${pub.authors.replace(/\*\*/g, "")}},
   booktitle={${pub.venue}},
   year={${pub.year}}
 }`;
@@ -71,30 +85,36 @@ export const Publications = () => {
                     {pub.title}
                   </h3>
 
-                  <p className="text-gray-400 text-sm mb-1">{pub.authors}</p>
+                  <p className="text-gray-400 text-sm mb-1">
+                    {renderAuthors(pub.authors)}
+                  </p>
                   <p className="text-cyan-400/70 text-sm italic">{pub.venue}</p>
                 </div>
               </div>
 
               <div className="flex gap-3 mt-4">
-                {"paper" in pub.links && pub.links.paper !== "#" && (
-                  <Link
-                    href={pub.links.paper}
-                    target="_blank"
-                    className="text-xs px-3 py-1.5 rounded-lg bg-purple-500/10 text-purple-300 hover:bg-purple-500/20 transition border border-purple-500/20"
-                  >
-                    PDF
-                  </Link>
-                )}
-                {"code" in pub.links && pub.links.code !== "#" && (
-                  <Link
-                    href={pub.links.code}
-                    target="_blank"
-                    className="text-xs px-3 py-1.5 rounded-lg bg-cyan-500/10 text-cyan-300 hover:bg-cyan-500/20 transition border border-cyan-500/20"
-                  >
-                    Code
-                  </Link>
-                )}
+                {"paper" in pub.links &&
+                  (pub.links as Record<string, string>).paper &&
+                  (pub.links as Record<string, string>).paper !== "#" && (
+                    <Link
+                      href={(pub.links as Record<string, string>).paper}
+                      target="_blank"
+                      className="text-xs px-3 py-1.5 rounded-lg bg-purple-500/10 text-purple-300 hover:bg-purple-500/20 transition border border-purple-500/20"
+                    >
+                      PDF
+                    </Link>
+                  )}
+                {"code" in pub.links &&
+                  (pub.links as Record<string, string>).code &&
+                  (pub.links as Record<string, string>).code !== "#" && (
+                    <Link
+                      href={(pub.links as Record<string, string>).code}
+                      target="_blank"
+                      className="text-xs px-3 py-1.5 rounded-lg bg-cyan-500/10 text-cyan-300 hover:bg-cyan-500/20 transition border border-cyan-500/20"
+                    >
+                      Code
+                    </Link>
+                  )}
                 <button
                   onClick={() => copyBibtex(index)}
                   className="text-xs px-3 py-1.5 rounded-lg bg-gray-500/10 text-gray-300 hover:bg-gray-500/20 transition border border-gray-500/20"

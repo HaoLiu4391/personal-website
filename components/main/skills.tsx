@@ -6,33 +6,6 @@ import { useInView } from "react-intersection-observer";
 import { SKILL_CATEGORIES, COURSES } from "@/constants";
 import { slideInFromLeft, slideInFromRight } from "@/lib/motion";
 
-const SkillBar = ({
-  name,
-  level,
-  delay,
-  inView,
-}: {
-  name: string;
-  level: number;
-  delay: number;
-  inView: boolean;
-}) => (
-  <div className="mb-3">
-    <div className="flex justify-between text-sm mb-1">
-      <span className="text-gray-300">{name}</span>
-      <span className="text-purple-400 font-mono">{level}%</span>
-    </div>
-    <div className="h-2 bg-[#1a0a3e] rounded-full overflow-hidden">
-      <motion.div
-        initial={{ width: 0 }}
-        animate={inView ? { width: `${level}%` } : { width: 0 }}
-        transition={{ duration: 1, delay, ease: "easeOut" }}
-        className="h-full rounded-full bg-gradient-to-r from-purple-500 to-cyan-500"
-      />
-    </div>
-  </div>
-);
-
 export const Skills = () => {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
 
@@ -50,31 +23,40 @@ export const Skills = () => {
           Skills
         </motion.h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
           {SKILL_CATEGORIES.map((category, catIndex) => (
             <motion.div
               key={category.title}
               variants={
-                catIndex === 0
-                  ? slideInFromLeft(0.3)
-                  : catIndex === 1
-                  ? slideInFromLeft(0.5)
-                  : slideInFromRight(0.3)
+                catIndex % 2 === 0
+                  ? slideInFromLeft(0.3 + catIndex * 0.1)
+                  : slideInFromRight(0.3 + catIndex * 0.1)
               }
               className="bg-[#0a0520] border border-[#2A0E61] rounded-xl p-6"
             >
-              <h3 className="text-white text-lg font-semibold mb-6">
+              <h3 className="text-white text-lg font-semibold mb-4">
                 {category.title}
               </h3>
-              {category.skills.map((skill, skillIndex) => (
-                <SkillBar
-                  key={skill.name}
-                  name={skill.name}
-                  level={skill.level}
-                  delay={0.3 + catIndex * 0.2 + skillIndex * 0.1}
-                  inView={inView}
-                />
-              ))}
+              <div className="flex flex-wrap gap-2">
+                {category.skills.map((skill, skillIndex) => (
+                  <motion.span
+                    key={skill}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={
+                      inView
+                        ? { opacity: 1, scale: 1 }
+                        : { opacity: 0, scale: 0.8 }
+                    }
+                    transition={{
+                      duration: 0.3,
+                      delay: 0.4 + catIndex * 0.1 + skillIndex * 0.05,
+                    }}
+                    className="text-sm px-3 py-1.5 rounded-lg bg-purple-500/10 text-purple-300 border border-purple-500/20 hover:bg-purple-500/20 hover:border-purple-500/40 transition-colors"
+                  >
+                    {skill}
+                  </motion.span>
+                ))}
+              </div>
             </motion.div>
           ))}
         </div>
@@ -84,14 +66,25 @@ export const Skills = () => {
           <h3 className="text-xl font-semibold text-white mb-6">
             Selected Online Courses
           </h3>
-          <div className="flex flex-wrap gap-3">
-            {COURSES.map((course) => (
-              <span
-                key={course}
-                className="text-sm px-4 py-2 rounded-lg bg-[#0a0520] border border-[#2A0E61] text-gray-300 hover:border-purple-500/50 transition-colors"
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {COURSES.map((course, index) => (
+              <motion.div
+                key={course.name}
+                initial={{ opacity: 0, y: 10 }}
+                animate={
+                  inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }
+                }
+                transition={{ duration: 0.3, delay: 0.7 + index * 0.05 }}
+                className="bg-[#0a0520] border border-[#2A0E61] rounded-lg p-4 hover:border-purple-500/50 transition-colors"
               >
-                {course}
-              </span>
+                <h4 className="text-white text-sm font-semibold">
+                  {course.name}
+                </h4>
+                <p className="text-cyan-400 text-xs mt-1">{course.topic}</p>
+                <p className="text-gray-500 text-xs mt-1 font-mono">
+                  {course.period}
+                </p>
+              </motion.div>
             ))}
           </div>
         </motion.div>

@@ -32,12 +32,15 @@ export const HeroContent = () => {
 
         <motion.div
           variants={slideInFromLeft(0.5)}
-          className="flex flex-col gap-4 mt-6 text-4xl md:text-6xl font-bold text-white max-w-[700px] w-auto h-auto"
+          className="flex flex-col gap-2 mt-6 text-4xl md:text-6xl font-bold text-white max-w-[700px] w-auto h-auto"
         >
           <span>
             Hi, I&apos;m{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500">
               {HERO_CONTENT.name}
+            </span>
+            <span className="text-2xl md:text-3xl text-gray-400 ml-3">
+              ({HERO_CONTENT.chineseName})
             </span>
           </span>
         </motion.div>
@@ -62,9 +65,22 @@ export const HeroContent = () => {
           {HERO_CONTENT.description}
         </motion.p>
 
+        {/* Motto */}
+        <motion.div
+          variants={slideInFromLeft(1.1)}
+          className="max-w-[580px] mt-1"
+        >
+          <p className="text-sm italic text-purple-300/70 leading-relaxed">
+            {HERO_CONTENT.motto}
+          </p>
+          <p className="text-xs text-purple-400/50 mt-1">
+            {HERO_CONTENT.mottoAuthor}
+          </p>
+        </motion.div>
+
         <motion.div
           variants={slideInFromLeft(1.2)}
-          className="flex flex-row gap-4 mt-2"
+          className="flex flex-row gap-4 mt-3"
         >
           <Link
             href="#publications"

@@ -2,8 +2,8 @@
 
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import Link from "next/link";
 
+import { HERO_CONTENT } from "@/constants";
 import { slideInFromLeft } from "@/lib/motion";
 
 export const CVSection = () => {
@@ -31,10 +31,10 @@ export const CVSection = () => {
           research experience, publications, and skills.
         </motion.p>
 
-        <motion.div variants={slideInFromLeft(0.6)}>
-          <Link
+        <motion.div variants={slideInFromLeft(0.6)} className="mb-8">
+          <a
             href="/personal-website/Hao_Liu_CV.pdf"
-            target="_blank"
+            download
             className="inline-flex items-center gap-2 py-3 px-8 button-primary text-white cursor-pointer rounded-lg text-lg hover:opacity-90 transition"
           >
             <svg
@@ -50,7 +50,26 @@ export const CVSection = () => {
               />
             </svg>
             Download CV (PDF)
-          </Link>
+          </a>
+        </motion.div>
+
+        <motion.div
+          variants={slideInFromLeft(0.8)}
+          className="text-gray-500 text-sm space-y-1"
+        >
+          <p>
+            Email:{" "}
+            <a
+              href={`mailto:${HERO_CONTENT.email}`}
+              className="text-purple-400 hover:text-purple-300 transition-colors"
+            >
+              {HERO_CONTENT.email}
+            </a>
+          </p>
+          <p>
+            WeChat:{" "}
+            <span className="text-gray-400">{HERO_CONTENT.wechat}</span>
+          </p>
         </motion.div>
       </motion.div>
     </section>
