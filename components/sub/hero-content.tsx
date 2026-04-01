@@ -107,7 +107,7 @@ export const HeroContent = () => {
           <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500 opacity-20 blur-2xl animate-pulse" />
           <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-[#7042f88b]">
             <img
-              src="/profile.jpg"
+              src="/personal-website/profile.jpg"
               alt="Hao Liu"
               className="w-full h-full object-cover"
             />

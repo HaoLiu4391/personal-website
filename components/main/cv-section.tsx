@@ -33,7 +33,7 @@ export const CVSection = () => {
 
         <motion.div variants={slideInFromLeft(0.6)}>
           <Link
-            href="/Hao_Liu_CV.pdf"
+            href="/personal-website/Hao_Liu_CV.pdf"
             target="_blank"
             className="inline-flex items-center gap-2 py-3 px-8 button-primary text-white cursor-pointer rounded-lg text-lg hover:opacity-90 transition"
           >
