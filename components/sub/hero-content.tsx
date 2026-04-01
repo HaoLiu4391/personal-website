@@ -70,10 +70,10 @@ export const HeroContent = () => {
           variants={slideInFromLeft(1.1)}
           className="max-w-[580px] mt-1"
         >
-          <p className="text-sm italic text-purple-300/70 leading-relaxed">
+          <p className="text-lg italic text-purple-300/70 leading-relaxed">
             {HERO_CONTENT.motto}
           </p>
-          <p className="text-xs text-purple-400/50 mt-1">
+          <p className="text-sm text-purple-400/50 mt-1">
             {HERO_CONTENT.mottoAuthor}
           </p>
         </motion.div>
@@ -117,17 +117,16 @@ export const HeroContent = () => {
 
       <motion.div
         variants={slideInFromRight(0.8)}
-        className="w-full h-full flex justify-center items-center mt-10 md:mt-0"
+        className="hidden md:flex w-full h-full justify-end items-center relative"
       >
-        <div className="relative w-[280px] h-[280px] md:w-[350px] md:h-[350px]">
-          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500 opacity-20 blur-2xl animate-pulse" />
-          <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-[#7042f88b]">
-            <img
-              src="/personal-website/profile.jpg"
-              alt="Hao Liu"
-              className="w-full h-full object-cover"
-            />
-          </div>
+        <div className="relative w-[450px] h-[350px] overflow-hidden rounded-xl">
+          {/* Left fade gradient overlay */}
+          <div className="absolute inset-0 z-10 bg-gradient-to-r from-[#030014] via-[#030014]/60 to-transparent" />
+          <img
+            src="/personal-website/profile.jpg"
+            alt="Hao Liu"
+            className="w-full h-full object-cover"
+          />
         </div>
       </motion.div>
     </motion.div>

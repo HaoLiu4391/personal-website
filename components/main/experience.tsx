@@ -6,6 +6,7 @@ import { useInView } from "react-intersection-observer";
 
 import { EXPERIENCES } from "@/constants";
 import { slideInFromLeft } from "@/lib/motion";
+import { renderWithProfLinks } from "@/lib/render-links";
 
 export const Experience = () => {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
@@ -67,7 +68,7 @@ export const Experience = () => {
                       className="overflow-hidden"
                     >
                       <p className="text-gray-400 text-sm leading-relaxed mb-3">
-                        {exp.description}
+                        {renderWithProfLinks(exp.description)}
                       </p>
                     </motion.div>
                   )}

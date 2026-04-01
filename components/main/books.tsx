@@ -32,7 +32,7 @@ export const Books = () => {
           variants={slideInFromLeft(0.2)}
           className="text-[40px] font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500 mb-4"
         >
-          Reading List
+          Reading List (since 2024)
         </motion.h2>
 
         <motion.p

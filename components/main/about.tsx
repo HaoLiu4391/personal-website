@@ -6,6 +6,7 @@ import { useInView } from "react-intersection-observer";
 import { ABOUT_TEXT, ABOUT_NEWS, HOBBIES, TIMELINE } from "@/constants";
 import { slideInFromLeft, slideInFromRight } from "@/lib/motion";
 import { HERO_CONTENT } from "@/constants";
+import { renderWithProfLinks } from "@/lib/render-links";
 
 export const About = () => {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
@@ -30,7 +31,7 @@ export const About = () => {
           className="bg-gradient-to-r from-purple-500/10 to-cyan-500/10 border border-purple-500/30 rounded-xl p-4 mb-8"
         >
           <span className="text-yellow-400 font-bold mr-2">News!!!</span>
-          <span className="text-gray-300">{ABOUT_NEWS}</span>
+          <span className="text-gray-300">{renderWithProfLinks(ABOUT_NEWS)}</span>
         </motion.div>
 
         {/* Bio */}
@@ -39,7 +40,7 @@ export const About = () => {
           className="text-gray-300 text-base leading-relaxed mb-6 max-w-4xl space-y-4"
         >
           {ABOUT_TEXT.split("\n\n").map((paragraph, i) => (
-            <p key={i}>{paragraph}</p>
+            <p key={i}>{renderWithProfLinks(paragraph)}</p>
           ))}
         </motion.div>
 
@@ -48,7 +49,7 @@ export const About = () => {
           variants={slideInFromLeft(0.5)}
           className="mb-8"
         >
-          <p className="text-purple-300/60 italic text-sm">
+          <p className="text-purple-300/60 italic text-lg">
             &ldquo;{HERO_CONTENT.chineseMotto}&rdquo;
           </p>
         </motion.div>
@@ -71,7 +72,7 @@ export const About = () => {
         </motion.h3>
 
         <div className="relative">
-          <div className="absolute left-[22px] md:left-1/2 md:-translate-x-[1px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-purple-500 to-cyan-500 opacity-30" />
+          <div className="absolute left-[21px] md:left-1/2 md:-translate-x-[1px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-purple-500 to-cyan-500 opacity-30" />
 
           {TIMELINE.map((item, index) => (
             <motion.div
@@ -101,13 +102,13 @@ export const About = () => {
                     {item.institution}
                   </p>
                   <p className="text-gray-400 text-sm mt-2 leading-relaxed">
-                    {item.description}
+                    {renderWithProfLinks(item.description)}
                   </p>
                 </div>
               </div>
 
-              <div className="absolute left-[14px] md:left-1/2 md:-translate-x-1/2 top-5 w-[18px] h-[18px] rounded-full bg-[#030014] border-2 border-purple-500 flex items-center justify-center z-10">
-                <span className="text-[10px]">{item.icon}</span>
+              <div className="absolute left-[6px] md:left-1/2 md:-translate-x-1/2 top-5 w-[32px] h-[32px] rounded-full bg-[#030014] border-2 border-purple-500 flex items-center justify-center z-10">
+                <span className="text-base">{item.icon}</span>
               </div>
 
               <div className="hidden md:block md:w-[45%]" />
