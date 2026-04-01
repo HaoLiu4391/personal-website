@@ -63,6 +63,7 @@ hao-liu-personal-website/
     |-- index.ts
   |- lib/
     |-- motion.ts
+    |-- render-links.tsx
     |-- utils.ts
   |- public/
   |- .eslintrc.json
