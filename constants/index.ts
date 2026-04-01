@@ -54,7 +54,7 @@ export const SOCIALS = [
 ] as const;
 
 // ─── About ───────────────────────────────────────────────────
-export const ABOUT_TEXT = `I am a computational cognitive scientist with a background in computer science from Tsinghua University. Now a second year graduate student at NYU Psychology, working closely with Prof. Sebastian Michelmann and Prof. Marcelo Mattar on Memory and Learning.
+export const ABOUT_TEXT = `I'm a graduate researcher in computational cognitive science, with a background in computer science from Tsinghua University. Currently a second year student at NYU Psychology, working closely with Prof. Sebastian Michelmann and Prof. Marcelo Mattar on Memory and Learning.
 
 The goal for my research is to understand how the brain works and what is consciousness. My research interests cover a wide range of fields related to Artificial Intelligence and Deep Learning, including Computer Vision, Natural Language Processing, and Reinforcement Learning. I'm also exploring Neuroscience and Psychology — including Theory of Mind, Spiking Neural Networks, Chaotic Attractors, Consciousness Modelling, Multi-Agent Systems & Game Theory, and Cellular Automata.
 

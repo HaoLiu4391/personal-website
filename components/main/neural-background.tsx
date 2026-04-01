@@ -104,7 +104,7 @@ export const NeuralBackground = () => {
     const w = () => window.innerWidth;
     const h = () => window.innerHeight;
 
-    const NEURON_COUNT = 40;
+    const NEURON_COUNT = 30;
     const CONNECTION_DIST = 200;
     const MOUSE_RADIUS = 250;
 
