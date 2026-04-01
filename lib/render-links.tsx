@@ -29,7 +29,7 @@ export function renderWithProfLinks(text: string) {
           href={PROFESSOR_LINKS[matchedName]}
           target="_blank"
           rel="noreferrer noopener"
-          className="text-purple-400 hover:text-purple-300 underline decoration-purple-400/30 hover:decoration-purple-400 transition-colors"
+          className="text-amber-400 hover:text-amber-300 underline decoration-amber-400/30 hover:decoration-amber-400 transition-colors"
         >
           {matchedName}
         </a>

@@ -1,7 +1,7 @@
 import { About } from "@/components/main/about";
 import { Books } from "@/components/main/books";
 import { CVSection } from "@/components/main/cv-section";
-import { Experience } from "@/components/main/experience";
+import { GameOfLife } from "@/components/main/game-of-life";
 import { Hero } from "@/components/main/hero";
 import { Publications } from "@/components/main/publications";
 import { Research } from "@/components/main/research";
@@ -15,8 +15,8 @@ export default function Home() {
         <About />
         <Research />
         <Publications />
-        <Experience />
         <Skills />
+        <GameOfLife />
         <Books />
         <CVSection />
       </div>

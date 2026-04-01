@@ -30,7 +30,7 @@ export const Books = () => {
       >
         <motion.h2
           variants={slideInFromLeft(0.2)}
-          className="text-[40px] font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500 mb-4"
+          className="text-[40px] font-semibold text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-500 mb-4"
         >
           Reading List (since 2024)
         </motion.h2>
@@ -53,8 +53,8 @@ export const Books = () => {
               onClick={() => setActiveCategory(cat)}
               className={`text-sm px-4 py-1.5 rounded-full border transition-colors ${
                 activeCategory === cat
-                  ? "bg-purple-500/20 border-purple-500/50 text-purple-300"
-                  : "border-[#2A0E61] text-gray-400 hover:border-purple-500/30 hover:text-gray-300"
+                  ? "bg-amber-500/20 border-amber-500/50 text-amber-300"
+                  : "border-[#1c1408] text-gray-400 hover:border-amber-500/30 hover:text-gray-300"
               }`}
             >
               {cat}
@@ -72,13 +72,13 @@ export const Books = () => {
                 inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }
               }
               transition={{ duration: 0.3, delay: 0.2 + index * 0.03 }}
-              className="bg-[#0a0520] border border-[#2A0E61] rounded-xl p-4 hover:border-purple-500/50 transition-colors"
+              className="bg-[#12100a] border border-[#1c1408] rounded-xl p-4 hover:border-amber-500/50 transition-colors"
             >
               <h4 className="text-white text-sm font-semibold leading-snug">
                 {book.title}
               </h4>
               <p className="text-gray-400 text-xs mt-1">{book.author}</p>
-              <span className="inline-block mt-2 text-xs px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">
+              <span className="inline-block mt-2 text-xs px-2 py-0.5 rounded-full bg-orange-500/10 text-orange-300 border border-orange-500/20">
                 {book.category}
               </span>
             </motion.div>

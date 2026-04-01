@@ -20,7 +20,7 @@ export const About = () => {
       >
         <motion.h2
           variants={slideInFromLeft(0.2)}
-          className="text-[40px] font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500 mb-8"
+          className="text-[40px] font-semibold text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-500 mb-8"
         >
           About Me
         </motion.h2>
@@ -28,7 +28,7 @@ export const About = () => {
         {/* News Banner */}
         <motion.div
           variants={slideInFromLeft(0.3)}
-          className="bg-gradient-to-r from-purple-500/10 to-cyan-500/10 border border-purple-500/30 rounded-xl p-4 mb-8"
+          className="bg-gradient-to-r from-amber-500/10 to-orange-500/10 border border-amber-500/30 rounded-xl p-4 mb-8"
         >
           <span className="text-yellow-400 font-bold mr-2">News!!!</span>
           <span className="text-gray-300">{renderWithProfLinks(ABOUT_NEWS)}</span>
@@ -49,7 +49,7 @@ export const About = () => {
           variants={slideInFromLeft(0.5)}
           className="mb-8"
         >
-          <p className="text-purple-300/60 italic text-lg">
+          <p className="text-amber-300/60 italic text-lg">
             &ldquo;{HERO_CONTENT.chineseMotto}&rdquo;
           </p>
         </motion.div>
@@ -72,7 +72,7 @@ export const About = () => {
         </motion.h3>
 
         <div className="relative">
-          <div className="absolute left-[21px] md:left-1/2 md:-translate-x-[1px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-purple-500 to-cyan-500 opacity-30" />
+          <div className="absolute left-[21px] md:left-1/2 md:-translate-x-[1px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-amber-500 to-orange-500 opacity-30" />
 
           {TIMELINE.map((item, index) => (
             <motion.div
@@ -91,14 +91,14 @@ export const About = () => {
                   index % 2 === 0 ? "md:pr-12 md:text-right" : "md:pl-12"
                 }`}
               >
-                <div className="bg-[#0a0520] border border-[#2A0E61] rounded-xl p-5 hover:border-purple-500/50 transition-colors">
-                  <span className="text-purple-400 text-sm font-mono">
+                <div className="bg-[#12100a] border border-[#1c1408] rounded-xl p-5 hover:border-amber-500/50 transition-colors">
+                  <span className="text-amber-400 text-sm font-mono">
                     {item.year}
                   </span>
                   <h4 className="text-white text-base font-semibold mt-1">
                     {item.title}
                   </h4>
-                  <p className="text-cyan-400 text-sm mt-1">
+                  <p className="text-orange-400 text-sm mt-1">
                     {item.institution}
                   </p>
                   <p className="text-gray-400 text-sm mt-2 leading-relaxed">
@@ -107,8 +107,8 @@ export const About = () => {
                 </div>
               </div>
 
-              <div className="absolute left-[6px] md:left-1/2 md:-translate-x-1/2 top-5 w-[32px] h-[32px] rounded-full bg-[#030014] border-2 border-purple-500 flex items-center justify-center z-10">
-                <span className="text-base">{item.icon}</span>
+              <div className="absolute left-[0px] md:left-1/2 md:-translate-x-1/2 top-5 w-[44px] h-[44px] rounded-full bg-[#0a0a0f] border-2 border-amber-500 flex items-center justify-center z-10">
+                <span className="text-2xl">{item.icon}</span>
               </div>
 
               <div className="hidden md:block md:w-[45%]" />

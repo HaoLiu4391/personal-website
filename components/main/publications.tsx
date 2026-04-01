@@ -52,7 +52,7 @@ export const Publications = () => {
       >
         <motion.h2
           variants={slideInFromLeft(0.2)}
-          className="text-[40px] font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500 mb-12"
+          className="text-[40px] font-semibold text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-500 mb-12"
         >
           Publications
         </motion.h2>
@@ -62,7 +62,7 @@ export const Publications = () => {
             <motion.div
               key={pub.title}
               variants={slideInFromLeft(0.3 + index * 0.15)}
-              className="group bg-[#0a0520] border border-[#2A0E61] rounded-xl p-6 hover:border-purple-500/50 transition-all"
+              className="group bg-[#12100a] border border-[#1c1408] rounded-xl p-6 hover:border-amber-500/50 transition-all"
             >
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1">
@@ -81,14 +81,14 @@ export const Publications = () => {
                     </span>
                   </div>
 
-                  <h3 className="text-white text-lg font-semibold mb-2 group-hover:text-purple-300 transition-colors">
+                  <h3 className="text-white text-lg font-semibold mb-2 group-hover:text-amber-300 transition-colors">
                     {pub.title}
                   </h3>
 
                   <p className="text-gray-400 text-sm mb-1">
                     {renderAuthors(pub.authors)}
                   </p>
-                  <p className="text-cyan-400/70 text-sm italic">{pub.venue}</p>
+                  <p className="text-orange-400/70 text-sm italic">{pub.venue}</p>
                 </div>
               </div>
 
@@ -99,7 +99,7 @@ export const Publications = () => {
                     <Link
                       href={(pub.links as Record<string, string>).paper}
                       target="_blank"
-                      className="text-xs px-3 py-1.5 rounded-lg bg-purple-500/10 text-purple-300 hover:bg-purple-500/20 transition border border-purple-500/20"
+                      className="text-xs px-3 py-1.5 rounded-lg bg-amber-500/10 text-amber-300 hover:bg-amber-500/20 transition border border-amber-500/20"
                     >
                       PDF
                     </Link>
@@ -110,7 +110,7 @@ export const Publications = () => {
                     <Link
                       href={(pub.links as Record<string, string>).code}
                       target="_blank"
-                      className="text-xs px-3 py-1.5 rounded-lg bg-cyan-500/10 text-cyan-300 hover:bg-cyan-500/20 transition border border-cyan-500/20"
+                      className="text-xs px-3 py-1.5 rounded-lg bg-orange-500/10 text-orange-300 hover:bg-orange-500/20 transition border border-orange-500/20"
                     >
                       Code
                     </Link>

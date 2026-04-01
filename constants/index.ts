@@ -11,7 +11,6 @@ export const NAV_LINKS = [
   { title: "About", link: "#about" },
   { title: "Research", link: "#research" },
   { title: "Publications", link: "#publications" },
-  { title: "Experience", link: "#experience" },
   { title: "Skills", link: "#skills" },
   { title: "Books", link: "#books" },
   { title: "CV", link: "#cv" },
@@ -196,17 +195,6 @@ export const PUBLICATIONS = [
   { title: "BlockScan: Detecting Anomalies in Blockchain Transactions", authors: "Yu, J., Wu, X., **Liu, H.**, Guo, W., & Xing, X.", venue: "The Thirty-ninth Annual Conference on Neural Information Processing Systems (NeurIPS 2025)", year: 2025, type: "conference", links: { paper: "https://arxiv.org/pdf/2410.04039" } },
   { title: "AdaSociety: An Adaptive Environment with Social Structures for Multi-Agent Decision-Making", authors: "Huang, Y., Wang, X., **Liu, H.**, Kong, F., Qin, A., Tang, M., Zhu, S., Bi, M., Qi, S., & Feng, X.", venue: "Advances in Neural Information Processing Systems, 37, Datasets and Benchmarks Track (NeurIPS 2024)", year: 2024, type: "conference", links: { paper: "https://neurips.cc/virtual/2024/poster/97511" } },
   { title: "Learning Distributed Representations with Complementary Components", authors: "**Liu, H.**, Mattar, M., Michelmann, S.", venue: "In Preparation", year: 2025, type: "preprint", links: {} },
-];
-
-// ─── Experience ──────────────────────────────────────────────
-export const EXPERIENCES = [
-  { period: "Oct 2024 – Present", role: "Graduate Research Assistant", organization: "NYU — Michelmann & Mattar Labs", description: "Main MA project: Building computational models of complementary memory systems using Stable Diffusion and Modern Hopfield Networks. Simulating distributed memory representations with varying encoding strength. Designing human behavioral experiments and aligning model representations with fMRI data from the Natural Scenes Dataset. Also exploring hierarchical RL and meta-RL for task representations with Marcelo and Qihong Lu.", tags: ["Diffusion Models", "Hopfield Networks", "fMRI", "Memory", "Behavioral Experiments"] },
-  { period: "Jun – Sep 2023", role: "Summer Research Intern", organization: "MIT — Brain & Cognitive Sciences (Tenenbaum Lab)", description: "Developed the Watch-Talk-Help framework — determining when to engage in natural language communication to align human-robot goals. Improved on 'watch-and-help' series by adding LLM-based agent belief parsing. Defined rules for updating agent beliefs and goals through natural language interaction.", tags: ["LLM", "Theory of Mind", "Multi-Agent Communication", "Bayesian Inference"] },
-  { period: "Sep 2022 – Jun 2024", role: "Research Intern, Multi-Agent Group", organization: "Beijing Institute for General Artificial Intelligence (BIGAI)", description: "Co-developed AdaSociety — an adaptive grid-world environment with social structures for multi-agent decision-making. Environment dynamics consist of resources, events, and agents. Deployed MAPPO and MADDPG algorithms using RLLib. Published at NeurIPS 2024 Datasets & Benchmarks Track.", tags: ["Multi-Agent RL", "Social Cognition", "RLLib", "NeurIPS 2024"] },
-  { period: "Mar – Jun 2024", role: "Remote Research Assistant", organization: "Northwestern University — Xinyu Xing Lab", description: "Contributed to BlockScan — LLM-based blockchain anomaly detection on Solana transactions. Developed multi-threaded data preprocessing pipelines. Trained and tested different LLM models with LoRA fine-tuning. Published at NeurIPS 2025.", tags: ["Blockchain", "LLM", "LoRA", "Anomaly Detection", "NeurIPS 2025"] },
-  { period: "Jun – Sep 2022", role: "Remote Research Intern", organization: "UCSD — Zhiting Hu Lab", description: "Developed a unified framework of data & parameter space by learning pairs of data, leveraging CNNs and Transformers for pairwise learning and functional embedding.", tags: ["Representation Learning", "Meta Learning", "CNNs", "Transformers"] },
-  { period: "Feb – Sep 2022", role: "Undergraduate Researcher", organization: "Tsinghua University — Maosong Sun Lab", description: "Built a transformer-based Chinese financial model by crawling 15GB of market text and designing a fine-tuning pipeline across Macro, Meso, and Micro levels for stock prediction.", tags: ["NLP", "Transformers", "Financial AI"] },
-  { period: "Sep 2021 – Nov 2022", role: "Undergraduate Researcher", organization: "Tsinghua University — Minlie Huang Lab (CoAI Group)", description: "Built a QA model using database querying. Curated 1M+ Zhihu QA pairs, built BM25 and BERT-based retrieval mechanisms, integrated retrieval into LongLM pretraining, surpassing baselines on BLEU/ROUGE.", tags: ["QA Systems", "Retrieval", "LLM", "Pretraining"] },
 ];
 
 // ─── Skills ──────────────────────────────────────────────────

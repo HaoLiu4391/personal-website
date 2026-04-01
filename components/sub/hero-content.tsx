@@ -22,9 +22,9 @@ export const HeroContent = () => {
       <div className="h-full w-full flex flex-col gap-5 justify-center m-auto text-start">
         <motion.div
           variants={slideInFromTop}
-          className="Welcome-box py-[8px] px-[7px] border border-[#7042f88b] opacity-[0.9]"
+          className="Welcome-box py-[8px] px-[7px] border border-[#f59e0b8b] opacity-[0.9]"
         >
-          <SparklesIcon className="text-[#b49bff] mr-[10px] h-5 w-5" />
+          <SparklesIcon className="text-[#fbbf24] mr-[10px] h-5 w-5" />
           <h1 className="Welcome-text text-[13px]">
             Cognitive Science & AI Research
           </h1>
@@ -36,7 +36,7 @@ export const HeroContent = () => {
         >
           <span>
             Hi, I&apos;m{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-500">
               {HERO_CONTENT.name}
             </span>
             <span className="text-2xl md:text-3xl text-gray-400 ml-3">
@@ -54,7 +54,7 @@ export const HeroContent = () => {
             wrapper="span"
             speed={50}
             repeat={Infinity}
-            className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400"
+            className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400"
           />
         </motion.div>
 
@@ -70,10 +70,10 @@ export const HeroContent = () => {
           variants={slideInFromLeft(1.1)}
           className="max-w-[580px] mt-1"
         >
-          <p className="text-lg italic text-purple-300/70 leading-relaxed">
+          <p className="text-lg italic text-amber-300/70 leading-relaxed">
             {HERO_CONTENT.motto}
           </p>
-          <p className="text-sm text-purple-400/50 mt-1">
+          <p className="text-sm text-amber-400/50 mt-1">
             {HERO_CONTENT.mottoAuthor}
           </p>
         </motion.div>
@@ -90,7 +90,7 @@ export const HeroContent = () => {
           </Link>
           <Link
             href="#cv"
-            className="py-2 px-6 border border-[#7042f88b] text-center text-gray-300 cursor-pointer rounded-lg text-sm hover:bg-[#7042f815] transition"
+            className="py-2 px-6 border border-[#f59e0b8b] text-center text-gray-300 cursor-pointer rounded-lg text-sm hover:bg-[#f59e0b15] transition"
           >
             Download CV
           </Link>
@@ -106,7 +106,7 @@ export const HeroContent = () => {
               target="_blank"
               rel="noreferrer noopener"
               key={name}
-              className="text-gray-400 hover:text-purple-400 transition-colors"
+              className="text-gray-400 hover:text-amber-400 transition-colors"
               title={name}
             >
               <Icon className="h-6 w-6" />
@@ -119,9 +119,9 @@ export const HeroContent = () => {
         variants={slideInFromRight(0.8)}
         className="hidden md:flex w-full h-full justify-end items-center relative"
       >
-        <div className="relative w-[450px] h-[350px] overflow-hidden rounded-xl">
+        <div className="relative w-[520px] h-[400px] overflow-hidden rounded-xl">
           {/* Left fade gradient overlay */}
-          <div className="absolute inset-0 z-10 bg-gradient-to-r from-[#030014] via-[#030014]/60 to-transparent" />
+          <div className="absolute inset-0 z-10 bg-gradient-to-r from-[#0a0a0f] via-[#0a0a0f]/30 to-transparent" />
           <img
             src="/personal-website/profile.jpg"
             alt="Hao Liu"

@@ -21,7 +21,7 @@ export const Research = () => {
       >
         <motion.h2
           variants={slideInFromLeft(0.2)}
-          className="text-[40px] font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500 mb-4"
+          className="text-[40px] font-semibold text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-500 mb-4"
         >
           Research
         </motion.h2>
@@ -41,7 +41,7 @@ export const Research = () => {
           {RESEARCH_FOCUS.map((focus) => (
             <span
               key={focus.label}
-              className="flex items-center gap-2 text-sm px-4 py-2 rounded-full bg-purple-500/10 text-purple-300 border border-purple-500/20"
+              className="flex items-center gap-2 text-sm px-4 py-2 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/20"
             >
               <span>{focus.icon}</span>
               {focus.label}
@@ -73,7 +73,7 @@ export const Research = () => {
                   ? slideInFromLeft(0.4 + index * 0.05)
                   : slideInFromRight(0.4 + index * 0.05)
               }
-              className="bg-[#0a0520] border border-[#2A0E61] rounded-xl p-5 hover:border-purple-500/50 transition-all cursor-pointer"
+              className="bg-[#12100a] border border-[#1c1408] rounded-xl p-5 hover:border-amber-500/50 transition-all cursor-pointer"
               onClick={() =>
                 setExpandedProject(expandedProject === index ? null : index)
               }
@@ -83,15 +83,15 @@ export const Research = () => {
                   <h3 className="text-white text-base font-semibold mb-1">
                     {project.title}
                   </h3>
-                  <p className="text-cyan-400 text-sm mb-1">
+                  <p className="text-orange-400 text-sm mb-1">
                     {renderWithProfLinks(project.advisors)}
                   </p>
-                  <p className="text-purple-400 text-xs font-mono mb-2">
+                  <p className="text-amber-400 text-xs font-mono mb-2">
                     {project.period}
                   </p>
                 </div>
                 <span
-                  className={`text-purple-400 text-lg transition-transform duration-300 mt-1 flex-shrink-0 ${
+                  className={`text-amber-400 text-lg transition-transform duration-300 mt-1 flex-shrink-0 ${
                     expandedProject === index ? "rotate-180" : ""
                   }`}
                 >
@@ -103,7 +103,7 @@ export const Research = () => {
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="text-xs px-2 py-0.5 rounded-full bg-purple-500/10 text-purple-300 border border-purple-500/20"
+                    className="text-xs px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/20"
                   >
                     {tag}
                   </span>
@@ -119,7 +119,7 @@ export const Research = () => {
                     transition={{ duration: 0.3 }}
                     className="overflow-hidden"
                   >
-                    <div className="mt-4 pt-4 border-t border-purple-500/20">
+                    <div className="mt-4 pt-4 border-t border-amber-500/20">
                       <p className="text-gray-400 text-sm leading-relaxed mb-3">
                         {renderWithProfLinks(project.description)}
                       </p>
@@ -128,7 +128,7 @@ export const Research = () => {
                           {project.details.map((detail, i) => (
                             <li
                               key={i}
-                              className="text-gray-400 text-sm leading-relaxed pl-4 relative before:content-[''] before:absolute before:left-0 before:top-[9px] before:w-[6px] before:h-[6px] before:rounded-full before:bg-purple-500/50"
+                              className="text-gray-400 text-sm leading-relaxed pl-4 relative before:content-[''] before:absolute before:left-0 before:top-[9px] before:w-[6px] before:h-[6px] before:rounded-full before:bg-amber-500/50"
                             >
                               {detail}
                             </li>

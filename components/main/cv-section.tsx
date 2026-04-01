@@ -18,7 +18,7 @@ export const CVSection = () => {
       >
         <motion.h2
           variants={slideInFromLeft(0.2)}
-          className="text-[40px] font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500 mb-8"
+          className="text-[40px] font-semibold text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-500 mb-8"
         >
           Curriculum Vitae
         </motion.h2>
@@ -61,7 +61,7 @@ export const CVSection = () => {
             Email:{" "}
             <a
               href={`mailto:${HERO_CONTENT.email}`}
-              className="text-purple-400 hover:text-purple-300 transition-colors"
+              className="text-amber-400 hover:text-amber-300 transition-colors"
             >
               {HERO_CONTENT.email}
             </a>
