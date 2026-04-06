@@ -1,6 +1,7 @@
 import { About } from "@/components/main/about";
 import { Books } from "@/components/main/books";
 import { CVSection } from "@/components/main/cv-section";
+import { Friends } from "@/components/main/friends";
 import { GameOfLife } from "@/components/main/game-of-life";
 import { Hero } from "@/components/main/hero";
 import { Publications } from "@/components/main/publications";
@@ -13,6 +14,7 @@ export default function Home() {
       <div className="flex flex-col gap-10">
         <Hero />
         <About />
+        <Friends />
         <Research />
         <Publications />
         <Skills />
