@@ -103,8 +103,28 @@ export default function PhilosophyPage() {
           </div>
         </motion.div>
 
+        {/* Self-Reflection */}
+        {content.selfReflection && (
+          <motion.div variants={slideInFromLeft(0.95)} className="mt-20">
+            <h2 className="text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-gray-400 to-gray-500 mb-8">
+              {"\u81EA\u6211\u6279\u5224"}
+            </h2>
+            <div className="space-y-6 border-l-2 border-amber-500/20 pl-6">
+              {content.selfReflection.map((text: string, i: number) => (
+                <motion.p
+                  key={`sr-${i}`}
+                  variants={slideInFromLeft(1.0 + i * 0.05)}
+                  className="text-gray-400 text-base leading-[1.9] tracking-wide"
+                >
+                  {text}
+                </motion.p>
+              ))}
+            </div>
+          </motion.div>
+        )}
+
         <motion.div
-          variants={slideInFromLeft(1.0)}
+          variants={slideInFromLeft(1.5)}
           className="mt-16 pt-8 border-t border-[#1c1408]"
         >
           <p className="text-gray-600 text-xs leading-relaxed">
