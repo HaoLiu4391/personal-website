@@ -14,7 +14,7 @@ export const NAV_LINKS = [
   { title: "Publications", link: "#publications" },
   { title: "Skills", link: "#skills" },
   { title: "Books", link: "#books" },
-  { title: "Philosophy", link: "/personal-website/philosophy" },
+  { title: "Philosophy", link: "/philosophy" },
   { title: "CV", link: "#cv" },
 ] as const;
 

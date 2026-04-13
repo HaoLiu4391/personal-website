@@ -34,7 +34,7 @@ export default function PhilosophyPage() {
       >
         <motion.div variants={slideInFromLeft(0.1)} className="mb-8">
           <Link
-            href="/personal-website/"
+            href="/"
             className="text-amber-500 hover:text-amber-400 transition text-sm"
           >
             &larr; Back to Home
