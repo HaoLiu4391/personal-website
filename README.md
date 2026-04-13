@@ -47,6 +47,7 @@ Here is the folder structure of this app.
 ```bash
 hao-liu-personal-website/
   |- app/
+    |-- philosophy/
     |-- apple-icon.png
     |-- favicon.ico
     |-- globals.css
