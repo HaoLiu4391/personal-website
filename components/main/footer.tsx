@@ -29,10 +29,10 @@ export const Footer = () => {
           ))}
         </div>
 
-        {/* Visitor Counter */}
+        {/* Visitor Counter (extraCount carries over the old laobi.icu total) */}
         <div className="mb-4">
           <img
-            src="https://visitor-badge.laobi.icu/badge?page_id=haoliu4391.personal-website"
+            src="https://hits.sh/haoliu4391.github.io/personal-website.svg?label=visitors&color=1283c3&labelColor=595959&extraCount=405"
             alt="visitor count"
             className="opacity-70 hover:opacity-100 transition-opacity"
           />
