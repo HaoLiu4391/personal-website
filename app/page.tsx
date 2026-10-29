@@ -37,7 +37,7 @@ function ProjectItem({ p }: { p: Project }) {
             </a>
           ))}
         </div>
-        <div className={p.figure ? "p-body with-figure" : "p-body"}>
+        <div className="p-body">
           {p.figure && (
             <figure>
               <a href={`${BASE}${p.figure.src}`}>
@@ -75,17 +75,13 @@ export default function Home() {
             <a href={`${BASE}/cv`}>cv</a>
           </p>
         </div>
-        {/* 1-bit dithered copies, one per theme; the link opens the original photo */}
-        <a className="photo" href={`${BASE}/photo.webp`}>
-          <img
-            className="on-light"
-            src={`${BASE}/photo-1bit.png`}
-            alt="Hao Liu in front of the old gate at Tsinghua University"
-            width={176}
-            height={220}
-          />
-          <img className="on-dark" src={`${BASE}/photo-1bit-dark.png`} alt="" width={176} height={220} />
-        </a>
+        <img
+          className="photo"
+          src={`${BASE}/photo.webp`}
+          alt="Hao Liu in front of the old gate at Tsinghua University"
+          width={176}
+          height={220}
+        />
       </section>
 
       <section id="news">

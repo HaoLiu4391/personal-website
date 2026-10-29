@@ -3,14 +3,13 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
-import { NAV, SITE } from "@/constants";
+import { BASE, NAV, SITE } from "@/constants";
 
 // A small Conway's Game of Life next to the name. One generation every half
-// second, reseeded when it dies out, every few minutes, or on click; still if
-// the visitor prefers reduced motion.
+// second, reseeded when it dies out or every few minutes. Visitors can draw
+// live cells on it; it stays still if they prefer reduced motion.
 function Life() {
   const ref = useRef<HTMLCanvasElement>(null);
-  const reseed = useRef(() => {});
 
   useEffect(() => {
     const canvas = ref.current;
@@ -27,6 +26,7 @@ function Life() {
       Array.from({ length: H }, () => Array.from({ length: W }, () => Math.random() < 0.28));
     let grid = seed();
     let generation = 0;
+    let drawing = false;
 
     const step = () => {
       const next = grid.map((row, y) =>
@@ -53,19 +53,47 @@ function Life() {
       );
     };
 
-    reseed.current = () => {
-      grid = seed();
+    // The canvas is scaled by CSS, so map the pointer through its box.
+    const paint = (e: PointerEvent) => {
+      const r = canvas.getBoundingClientRect();
+      const x = Math.floor(((e.clientX - r.left) / r.width) * W);
+      const y = Math.floor(((e.clientY - r.top) / r.height) * H);
+      if (x < 0 || x >= W || y < 0 || y >= H) return;
+      grid[y][x] = true;
       draw();
     };
+    const down = (e: PointerEvent) => {
+      drawing = true;
+      try {
+        canvas.setPointerCapture(e.pointerId);
+      } catch {
+        // capture only keeps the stroke going outside the canvas
+      }
+      paint(e);
+    };
+    const move = (e: PointerEvent) => drawing && paint(e);
+    const up = () => (drawing = false);
+    canvas.addEventListener("pointerdown", down);
+    canvas.addEventListener("pointermove", move);
+    canvas.addEventListener("pointerup", up);
+    canvas.addEventListener("pointercancel", up);
 
     draw();
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const timer = setInterval(() => {
-      if (document.hidden) return;
-      step();
-      draw();
-    }, 500);
-    return () => clearInterval(timer);
+    const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const timer = still
+      ? undefined
+      : setInterval(() => {
+          if (document.hidden || drawing) return;
+          step();
+          draw();
+        }, 500);
+    return () => {
+      clearInterval(timer);
+      canvas.removeEventListener("pointerdown", down);
+      canvas.removeEventListener("pointermove", move);
+      canvas.removeEventListener("pointerup", up);
+      canvas.removeEventListener("pointercancel", up);
+    };
   }, []);
 
   return (
@@ -73,8 +101,7 @@ function Life() {
       ref={ref}
       className="life"
       aria-hidden="true"
-      title="Conway's Game of Life (click to reseed)"
-      onClick={() => reseed.current()}
+      title="Conway's Game of Life. You can draw on it."
     />
   );
 }
@@ -111,6 +138,38 @@ function ThemeToggle() {
   );
 }
 
+// j and k jump to the next and previous section heading, t switches the theme.
+function Keys() {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.ctrlKey || e.metaKey || e.altKey) return;
+      const el = e.target as HTMLElement;
+      if (el.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName)) return;
+
+      if (e.key === "t") {
+        document.querySelector<HTMLButtonElement>(".theme")?.click();
+        return;
+      }
+      if (e.key !== "j" && e.key !== "k") return;
+
+      // Headings stop 24px below the top (scroll-margin-top in the CSS).
+      const heads = Array.from(document.querySelectorAll<HTMLElement>("main h1, main h2"));
+      const top = (h: HTMLElement) => h.getBoundingClientRect().top;
+      const target =
+        e.key === "j" ? heads.find((h) => top(h) > 28) : heads.reverse().find((h) => top(h) < 20);
+      if (target) target.scrollIntoView({ block: "start" });
+      else if (e.key === "k") window.scrollTo(0, 0);
+    };
+    window.addEventListener("keydown", onKey);
+
+    console.log(`.O.\n..O\nOOO\n\nsource: ${SITE.source}\nplain text: ${window.location.origin}${BASE}/hao.txt`);
+
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
+  return null;
+}
+
 export function Header() {
   return (
     <header>
@@ -129,22 +188,28 @@ export function Header() {
         ))}
         <ThemeToggle />
       </nav>
+      <Keys />
     </header>
   );
 }
 
-// COMMIT is filled in at build time by next.config.js.
+// COMMIT and UPDATED are filled in at build time by next.config.js.
 const COMMIT = process.env.COMMIT ?? "";
+const UPDATED = process.env.UPDATED || SITE.updated;
 
 export function Footer() {
   return (
     <footer>
-      <span>last updated {SITE.updated}</span>
-      {COMMIT && (
-        <span>
-          build <a href={`${SITE.source}/commit/${COMMIT}`}>{COMMIT}</a>
-        </span>
-      )}
+      <span>
+        updated {UPDATED}
+        {COMMIT && (
+          <>
+            {" "}(<a href={`${SITE.source}/commit/${COMMIT}`}>{COMMIT}</a>)
+          </>
+        )}
+      </span>
+      <a href={`${BASE}/hao.txt`}>plain text</a>
+      <span className="keys">j/k sections, t theme</span>
       <a className="source" href={SITE.source}>
         source
       </a>

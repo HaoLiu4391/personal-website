@@ -72,6 +72,7 @@ p {
 /* man-page style section headings */
 h1,
 h2 {
+  scroll-margin-top: 24px;
   margin: 44px 0 14px;
   font-size: 1rem;
   font-weight: 600;
@@ -137,7 +138,8 @@ header .top {
   height: 48px;
   color: var(--muted);
   opacity: 0.5;
-  cursor: pointer;
+  cursor: crosshair;
+  touch-action: none;
 }
 
 nav {
@@ -181,32 +183,9 @@ nav a:hover,
 
 .photo {
   display: block;
-}
-
-.photo img {
-  display: block;
   width: 176px;
   height: 220px;
-  image-rendering: pixelated;
-}
-
-.photo .on-dark,
-:root[data-theme="dark"] .photo .on-light {
-  display: none;
-}
-
-:root[data-theme="dark"] .photo .on-dark {
-  display: block;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .photo .on-light {
-    display: none;
-  }
-
-  :root:not([data-theme="light"]) .photo .on-dark {
-    display: block;
-  }
+  object-fit: cover;
 }
 
 .links {
@@ -326,8 +305,10 @@ pre {
   color: var(--muted);
 }
 
+/* paper figures get the full text width, up to about 900px */
 figure {
-  margin: 12px 0 4px;
+  max-width: 54rem;
+  margin: 14px 0 6px;
 }
 
 figure img {
@@ -388,30 +369,53 @@ footer .source {
   margin-left: auto;
 }
 
-@media (min-width: 760px) {
-  .page {
-    padding: 48px 32px 40px;
+/* the keyboard hint means nothing on touch screens */
+@media (hover: none) {
+  footer .keys {
+    display: none;
   }
 }
 
-/* wide screens: figure beside the bullets */
-@media (min-width: 1000px) {
-  .p-body.with-figure {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 26rem;
-    gap: 36px;
-    align-items: start;
+/* printing gives plain black on white without the header widgets */
+@media print {
+  :root,
+  :root[data-theme="dark"],
+  :root:not([data-theme="light"]) {
+    --bg: #fff;
+    --fg: #000;
+    --muted: #444;
+    --rule: #bbb;
+    --accent: #000;
+    --code-bg: #f4f4f4;
   }
 
-  .p-body.with-figure figure {
-    grid-column: 2;
-    grid-row: 1;
-    margin-top: 10px;
+  html {
+    font-size: 11pt;
   }
 
-  .p-body.with-figure ul {
-    grid-column: 1;
-    grid-row: 1;
+  .page {
+    max-width: none;
+    padding: 0;
+  }
+
+  .life,
+  nav,
+  footer .keys {
+    display: none;
+  }
+
+  figure {
+    break-inside: avoid;
+  }
+
+  figure img {
+    opacity: 1 !important;
+  }
+}
+
+@media (min-width: 760px) {
+  .page {
+    padding: 48px 32px 40px;
   }
 }
 
@@ -430,7 +434,7 @@ footer .source {
     gap: 16px;
   }
 
-  .photo img {
+  .photo {
     width: 88px;
     height: 110px;
   }
