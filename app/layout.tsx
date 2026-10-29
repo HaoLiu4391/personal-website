@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { IBM_Plex_Mono, Source_Serif_4 } from "next/font/google";
+import { IBM_Plex_Mono } from "next/font/google";
 import type { PropsWithChildren } from "react";
 
 import { Footer, Header } from "@/components/site";
@@ -7,24 +7,18 @@ import { siteConfig } from "@/config";
 
 import "./globals.css";
 
-const serif = Source_Serif_4({
-  subsets: ["latin"],
-  style: ["normal", "italic"],
-  variable: "--font-serif",
-  display: "swap",
-});
-
 const mono = IBM_Plex_Mono({
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["400", "600"],
+  style: ["normal", "italic"],
   variable: "--font-mono",
   display: "swap",
 });
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fcfcfa" },
-    { media: "(prefers-color-scheme: dark)", color: "#161514" },
+    { media: "(prefers-color-scheme: light)", color: "#fbfbf8" },
+    { media: "(prefers-color-scheme: dark)", color: "#0f1110" },
   ],
 };
 
@@ -36,7 +30,7 @@ const THEME_INIT =
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
-    <html lang="en" className={`${serif.variable} ${mono.variable}`} suppressHydrationWarning>
+    <html lang="en" className={mono.variable} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT }} />
       </head>

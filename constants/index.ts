@@ -35,9 +35,9 @@ export const NAV = [
 ];
 
 export const INTRO = [
-  `I'm a first-year PhD student in Cognitive Sciences at UC Irvine, advised by [Mark Steyvers](${P.steyvers}) and [Aaron Bornstein](${P.bornstein}). With Mark I work on how AI could help people learn, starting from what it looks like when someone is stuck. Aaron and I model how foragers spread over shared resources, and whether groups do best near the edge of chaos.`,
-  `Over the past few years I've worked on models of episodic memory, theory of mind in language models, multi-agent environments, the dynamics of group behavior, human–AI interaction in learning, and, on the side, anomaly detection in blockchain transactions. Outside of projects I keep coming back to cellular automata, chaotic attractors and spiking networks, to some mathematics (algebraic topology, fractal geometry), and to philosophy of mind and of logic, especially questions about perception and consciousness.`,
-  `Before UCI I did an M.S. at NYU with [Sebastian Michelmann](${P.michelmann}) and [Marcelo Mattar](${P.mattar}), working on episodic memory encoding with generative models. I studied computer science at Tsinghua and worked in BIGAI's multi-agent group from 2022 to 2024. In summer 2023 I was at MIT with [Tianmin Shu](${P.shu}) and [Josh Tenenbaum](${P.tenenbaum}), working on theory of mind.`,
+  `I'm a first-year PhD student in Cognitive Sciences at UC Irvine, advised by [Mark Steyvers](${P.steyvers}) and [Aaron Bornstein](${P.bornstein}). With Mark I work on AI intervention in learning; we build Bayesian cognitive models of stuckness in problem solving and use them to decide when an AI should step in. Aaron and I study multi-agent foraging. We model how learning agents converge to the ideal free distribution and ask whether groups forage best near the edge of chaos.`,
+  `Over the past few years I've worked on computational models of episodic memory, theory of mind in LLMs, visual reasoning in vision-language models, multi-agent reinforcement learning, collective behavior and nonlinear dynamics, human-AI interaction in learning, and, on the side, anomaly detection in blockchain transactions. Outside of projects I keep coming back to cellular automata, chaotic attractors and spiking neural networks, to some mathematics (algebraic topology, fractal geometry), and to philosophy of mind (perception and consciousness above all) and philosophy of logic.`,
+  `Before UCI I did an M.S. at NYU with [Sebastian Michelmann](${P.michelmann}) and [Marcelo Mattar](${P.mattar}) on episodic memory encoding with generative models. I studied computer science at Tsinghua and, from 2022 to 2024, worked on multi-agent reinforcement learning at BIGAI. In summer 2023 I was at MIT with [Tianmin Shu](${P.shu}) and [Josh Tenenbaum](${P.tenenbaum}) on machine theory of mind.`,
 ];
 
 export const NEWS = [
@@ -143,21 +143,21 @@ export const PROJECTS: Project[] = [
     paper: false,
     ongoing: true,
     bullets: [
-      "When should an AI step in to help someone learn, and with what? People often learn most from problems they fail some of the time, so help that comes too early can backfire.",
-      "We start by telling productive struggle apart from being stuck, using only moves, restarts and timing in Sokoban puzzles of graded difficulty.",
-      "Next come experiments in which an AI steps in at different moments and with different kinds of help.",
+      "When should an AI intervene while someone is learning to solve problems, and with what kind of help? Stepping in too early can cut short productive struggle, which often helps people learn.",
+      "We build Bayesian cognitive models that infer, from moves, restarts and response times, whether a solver is in productive struggle or stuck.",
+      "Data come from online Sokoban experiments. Later ones vary hint timing and hint type, next-step versus strategy-level.",
     ],
   },
   {
     years: "2026–",
-    title: "Group foraging and the edge of chaos",
+    title: "Multi-agent foraging and the edge of chaos",
     where: `UC Irvine, with [Aaron Bornstein](${P.bornstein})`,
     paper: false,
     ongoing: true,
     bullets: [
-      "How does a group spread itself over shared resources, and what does each forager need to predict, or hear from others, to get there?",
-      "Our working idea is that groups do best near the edge of chaos, where they don't waste moves but can still follow resources that shift.",
-      "We study this with agent-based simulations of foragers who forecast yield and crowding and pass on what they saw, and plan a version of the task for groups of people.",
+      "Our working hypothesis is that collective foraging is most efficient near the edge of chaos, between ordered and chaotic regimes.",
+      "How do groups of learning agents converge to the ideal free distribution, and what does each forager need to predict about the patches and the other foragers?",
+      "Agent-based models with depleting patches, in which foragers forecast yield and crowding and share what they saw by word of mouth. We analyze them with bifurcation diagrams and Lyapunov exponents, and plan a multiplayer version for human groups.",
     ],
   },
   {
@@ -168,22 +168,22 @@ export const PROJECTS: Project[] = [
     links: [{ label: "arXiv", url: "https://arxiv.org/abs/2610.17777" }],
     figure: { src: "/figures/hoptom.webp", alt: "Figure 2 of the HopToM paper: belief nesting can overstate effective order", caption: "Fig. 2 of the paper" },
     bullets: [
-      "Many nominally higher-order theory-of-mind questions admit lower-order shortcuts; defining a question's effective order by the distinct events behind each belief prefix shows this inflation across existing benchmarks.",
-      "HopToM has questions certified to need full-order reasoning. Four frontier LLMs fall from 73.5% at first order to 20.0% at fourth order, and human participants also struggle.",
+      "Many benchmark questions that look higher-order can be answered with lower-order reasoning. We define a question's effective order by the distinct events behind each belief prefix, and by that measure existing benchmarks overstate the order they test.",
+      "HopToM has questions certified to need full-order reasoning. Accuracy of four frontier LLMs falls from 73.5% at first order to 20.0% at fourth order.",
       "HopTrace encodes each interaction once into perspective records and answers nested queries from them, gaining 22.0 and 38.5 points at fourth and fifth order with 20 to 39 times fewer tokens than multi-call methods.",
     ],
   },
   {
     years: "2026",
-    title: "Knot diagrams as a test for vision-language models (KnotBench)",
+    title: "Diagrammatic knot reasoning in vision-language models (KnotBench)",
     where: "with Jicheng Liu",
     paper: true,
     links: [{ label: "arXiv", url: "https://arxiv.org/abs/2605.09900" }],
     figure: { src: "/figures/knotbench.webp", alt: "Three drawings of the trefoil knot with 3, 5 and 7 crossings", caption: "Fig. 2 of the paper: three drawings of the same knot" },
     bullets: [
-      "858,318 knot diagrams from 1,951 prime knots with 3 to 19 crossings. Answers are checked automatically against each knot's canonical signature in Regina.",
-      "14 tasks in four families: whether two diagrams show the same knot, what a move will do, which knot it is, and translating between the drawing and a symbolic code. Each task comes in an image and a symbol version, which separates failures of perception from failures of operating on the structure.",
-      "Frontier models, with and without extended thinking, sit near random on many tasks. They seem to pick up features of a diagram but cannot simulate moves on them.",
+      "858,318 knot diagrams from 1,951 prime knots with crossing numbers 3 to 19. Answers are checked against Regina's canonical knot signature, so no human labels are involved.",
+      "14 tasks in four families (equivalence judgment, move prediction, identification, cross-modal grounding). Each task has an image and a symbolic version, which separates failures of perception from failures of operating on the structure.",
+      "Frontier VLMs, with and without reasoning modes, stay near chance on many tasks. They seem to encode features of a diagram but cannot simulate Reidemeister moves on it.",
     ],
   },
   {
@@ -197,20 +197,20 @@ export const PROJECTS: Project[] = [
     ],
     figure: { src: "/figures/memory.webp", alt: "Figure 2A to C of the memory paper: reconstructions over inversion steps and the encoding and reinstatement schematic", caption: "Fig. 2A–C of the paper" },
     bullets: [
-      "A memory is encoded by searching for a starting point from which a pretrained generative model can regenerate the input with its frozen weights. No separate inverse mapping between cortex and hippocampus is needed, and searching longer buys a more precise memory.",
-      "Implemented with a toy model and with Stable Diffusion and StyleGAN-XL. Shallow encoding selectively impairs lure rejection on the Mnemonic Similarity Task, as in older adults, and models fine-tuned on a domain need fewer steps for images from that domain.",
-      "The latent starting points have a representational geometry like the medial temporal lobe, and reinstatement passes through the visual hierarchy in reverse order.",
+      "A pretrained generative network approximates each input through its frozen weights, and the memory is the starting point from which the same weights reinstate it. This removes the need for mutually invertible cortical-hippocampal mappings and trades computational effort for mnemonic precision.",
+      "Implemented with a toy model and with large image generators (Stable Diffusion, StyleGAN-XL). Shallow encoding selectively impairs lure rejection on the Mnemonic Similarity Task, as in aging, and domain-finetuned models need fewer approximation steps for in-domain images.",
+      "The representational geometry of the latent starting points resembles the medial temporal lobe, while reinstatement traverses the visual hierarchy in reverse order.",
     ],
   },
   {
     years: "2025",
-    title: "Hierarchical and meta-RL for task representations in sparse-reward environments.",
+    title: "Hierarchical and meta-reinforcement learning of task representations in sparse-reward environments.",
     where: `NYU, with [Marcelo Mattar](${P.mattar}) & Qihong Lu`,
     paper: false,
   },
   {
     years: "2025",
-    title: "A side project that treats a citation graph like a weather map, with paper density as pressure and citations as flow.",
+    title: "A side project that renders citation networks as weather maps, with paper density as pressure and citation flow as wind.",
     paper: false,
   },
   {
@@ -221,7 +221,7 @@ export const PROJECTS: Project[] = [
     links: [{ label: "arXiv", url: "https://arxiv.org/abs/2410.04039" }],
     figure: { src: "/figures/blockscan.webp", alt: "Figure 1 of the BlockScan paper: how transactions are tokenized", caption: "Fig. 1 of the paper" },
     bullets: [
-      "A Transformer built for blockchain transactions, which mix chain-specific tokens, text and numbers. A modular tokenizer keeps the three in balance, and pretraining uses a masked language modeling objective adapted to long transaction sequences.",
+      "A Transformer built for blockchain transactions, which mix chain-specific tokens with text and numbers. A modular tokenizer balances information across these modalities, and pretraining uses a masked language modeling objective adapted to long transaction sequences.",
       "On Ethereum and Solana it keeps false positives low. On Solana it was the only method tested that found the anomalous transactions with high accuracy.",
     ],
   },
@@ -233,13 +233,13 @@ export const PROJECTS: Project[] = [
   },
   {
     years: "2023",
-    title: "LLM-based agents that track each other's beliefs and decide when talking helps in a household task (Watch-Talk-Help).",
+    title: "LLM agents with theory of mind that decide when to communicate in embodied household tasks (Watch-Talk-Help).",
     where: `MIT, with [Tianmin Shu](${P.shu}) & [Josh Tenenbaum](${P.tenenbaum})`,
     paper: false,
   },
   {
     years: "2022–24",
-    title: "A multi-agent environment with changing social structure (AdaSociety)",
+    title: "Multi-agent environment with adaptive social structures (AdaSociety)",
     where: "BIGAI, with Siyuan Qi & Xue Feng",
     paper: true,
     links: [
@@ -248,25 +248,25 @@ export const PROJECTS: Project[] = [
     ],
     figure: { src: "/figures/adasociety.webp", alt: "Figure 1 of the AdaSociety paper: physical and social components of the environment", caption: "Fig. 1 of the paper" },
     bullets: [
-      "A customizable multi-agent environment whose state and action spaces grow as agents act. Social structure is explicit and can change, decides how rewards and information are shared, and is varied across three mini-games.",
+      "A customizable multi-agent environment whose state and action spaces grow as agents act. Social structure is an explicit, changeable part of the state and decides how rewards and information are shared. Three mini-games vary it.",
       "Some social structures improve both individual and group outcomes, but current RL and LLM-based agents make little use of them.",
     ],
   },
   {
     years: "2022",
-    title: "A Chinese financial language model trained on 15 GB of market text.",
+    title: "A Chinese financial language model pretrained on 15 GB of market text.",
     where: "Tsinghua, with Maosong Sun",
     paper: false,
   },
   {
     years: "2021–22",
-    title: "Retrieval-based QA over a million Zhihu question–answer pairs, with BM25 and BERT.",
+    title: "Retrieval-based question answering over a million Zhihu question-answer pairs, with BM25 and BERT.",
     where: "Tsinghua, with Minlie Huang",
     paper: false,
   },
   {
     years: "2021–22",
-    title: "Self-supervised ViT on ImageNet-1K, written from scratch.",
+    title: "Self-supervised ViT pretraining on ImageNet-1K, implemented from scratch.",
     paper: false,
   },
   {

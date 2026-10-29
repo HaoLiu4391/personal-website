@@ -6,17 +6,18 @@ import { useEffect, useRef, useState } from "react";
 import { NAV, SITE } from "@/constants";
 
 // A small Conway's Game of Life next to the name. One generation every half
-// second, reseeded when it dies out or every few minutes; still if the
-// visitor prefers reduced motion.
+// second, reseeded when it dies out, every few minutes, or on click; still if
+// the visitor prefers reduced motion.
 function Life() {
   const ref = useRef<HTMLCanvasElement>(null);
+  const reseed = useRef(() => {});
 
   useEffect(() => {
     const canvas = ref.current;
     const ctx = canvas?.getContext("2d");
     if (!canvas || !ctx) return;
 
-    const W = 40, H = 12, S = 3;
+    const W = 50, H = 12, S = 4;
     const dpr = window.devicePixelRatio || 1;
     canvas.width = W * S * dpr;
     canvas.height = H * S * dpr;
@@ -52,6 +53,11 @@ function Life() {
       );
     };
 
+    reseed.current = () => {
+      grid = seed();
+      draw();
+    };
+
     draw();
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const timer = setInterval(() => {
@@ -62,7 +68,15 @@ function Life() {
     return () => clearInterval(timer);
   }, []);
 
-  return <canvas ref={ref} className="life" aria-hidden="true" title="Conway's Game of Life" />;
+  return (
+    <canvas
+      ref={ref}
+      className="life"
+      aria-hidden="true"
+      title="Conway's Game of Life (click to reseed)"
+      onClick={() => reseed.current()}
+    />
+  );
 }
 
 function ThemeToggle() {
@@ -119,11 +133,21 @@ export function Header() {
   );
 }
 
+// COMMIT is filled in at build time by next.config.js.
+const COMMIT = process.env.COMMIT ?? "";
+
 export function Footer() {
   return (
     <footer>
       <span>last updated {SITE.updated}</span>
-      <a href={SITE.source}>source</a>
+      {COMMIT && (
+        <span>
+          build <a href={`${SITE.source}/commit/${COMMIT}`}>{COMMIT}</a>
+        </span>
+      )}
+      <a className="source" href={SITE.source}>
+        source
+      </a>
     </footer>
   );
 }
