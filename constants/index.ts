@@ -1,353 +1,286 @@
-import {
-  RxGithubLogo,
-  RxTwitterLogo,
-  RxLinkedinLogo,
-} from "react-icons/rx";
-import { SiGooglescholar } from "react-icons/si";
-import { HiOutlineMail } from "react-icons/hi";
+// Everything the home page says lives here. Links inside text use [label](url).
 
-// ─── Navigation ──────────────────────────────────────────────
-export const NAV_LINKS = [
-  { title: "About", link: "#about" },
-  { title: "Friends", link: "#friends" },
-  { title: "Research", link: "#research" },
-  { title: "Publications", link: "#publications" },
-  { title: "Skills", link: "#skills" },
-  { title: "Books", link: "#books" },
-  { title: "Philosophy", link: "/philosophy" },
-  { title: "CV", link: "#cv" },
-] as const;
+export const BASE = "/personal-website";
 
-export const LINKS = {
-  sourceCode: "https://github.com/HaoLiu4391/personal-website",
-};
-
-// ─── Hero ────────────────────────────────────────────────────
-export const HERO_CONTENT = {
+export const SITE = {
   name: "Hao Liu",
-  chineseName: "刘好",
-  roles: [
-    "Memory",
-    2000,
-    "Cognition",
-    2000,
-    "Curiosity",
-    2000,
-    "Simulation",
-    2000,
-    "Consciousness",
-    2000,
-  ] as (string | number)[],
-  motto: `"Use applied science, not as the end to which human beings are to be made the means, but as the means to producing a race of free individuals."`,
-  mottoAuthor: "— Aldous Huxley",
-  chineseMotto: "惟此独立之精神，自由之思想，历千万祀，与天壤而同久，共三光而永光。",
-  description:
-    "I study how minds compute — bridging artificial intelligence and cognitive science to understand memory, learning, and social cognition through computational models.",
-  email: "hl4220@nyu.edu",
-  wechat: "Jeffery0101010101",
+  zh: "刘好",
+  email: "liuh36@uci.edu",
+  scholar: "https://scholar.google.com/citations?user=pzqgeLAAAAAJ",
+  github: "https://github.com/HaoLiu4391",
+  x: "https://x.com/hao_liu_cogsci",
+  source: "https://github.com/HaoLiu4391/personal-website",
+  updated: "2026-10",
 };
 
-// ─── Social Links ────────────────────────────────────────────
-export const SOCIALS = [
-  { name: "GitHub", icon: RxGithubLogo, link: "https://github.com/haoliu4391" },
-  { name: "Twitter", icon: RxTwitterLogo, link: "https://x.com/hao_liu_cogsci" },
-  { name: "Google Scholar", icon: SiGooglescholar, link: "https://scholar.google.com/citations?user=PLACEHOLDER" },
-  { name: "Email", icon: HiOutlineMail, link: "mailto:hl4220@nyu.edu" },
-] as const;
+const P = {
+  steyvers: "https://steyvers.socsci.uci.edu/",
+  bornstein: "https://aaron.bornstein.org/",
+  michelmann: "https://as.nyu.edu/faculty/sebastian-michelmann.html",
+  mattar: "https://as.nyu.edu/faculty/marcelo-mattar.html",
+  shu: "https://www.tshu.io/",
+  tenenbaum: "https://web.mit.edu/cocosci/josh.html",
+  su: "https://www.cs.tsinghua.edu.cn/csen/info/1313/4403.htm",
+  xing: "http://xinyuxing.org/",
+  guo: "https://henrygwb.github.io/",
+  cheng: "https://mmcheng.net/cmm/",
+};
 
-// ─── About ───────────────────────────────────────────────────
-export const ABOUT_TEXT = `I'm a graduate researcher in computational cognitive science, with a background in computer science from Tsinghua University. Currently a second year student at NYU Psychology, working closely with Prof. Sebastian Michelmann and Prof. Marcelo Mattar on Memory and Learning.
-
-The goal for my research is to understand how the brain works and what is consciousness. My research interests cover a wide range of fields related to Artificial Intelligence and Deep Learning, including Computer Vision, Natural Language Processing, and Reinforcement Learning. I'm also exploring Neuroscience and Psychology — including Theory of Mind, Spiking Neural Networks, Chaotic Attractors, Consciousness Modelling, Multi-Agent Systems & Game Theory, and Cellular Automata.
-
-I read and learn math and philosophy as well — especially Algebraic Topology, Fractal Geometry, Philosophy of Logic, and Philosophy of Mind (Perception & Consciousness).
-
-Now I'm focusing on computational modeling for distributed memory systems.`;
-
-export const ABOUT_NEWS =
-  "I'll join UC Irvine this fall as a PhD Student, co-supervised by Prof. Mark Steyvers and Prof. Aaron Bornstein. Focusing on a lot of new and exciting directions! Feel free to reach out!";
-
-export const HOBBIES = "Travelling, Mountain Hiking, Photography, Reading books and Playing Minecraft. :)";
-
-// ─── Timeline ────────────────────────────────────────────────
-export const TIMELINE = [
-  { year: "2026 –", title: "PhD in Cognitive Sciences", institution: "University of California, Irvine", description: "Concentration in Cognitive Neuroscience. Co-supervised by Prof. Mark Steyvers and Prof. Aaron Bornstein.", icon: "🎓" },
-  { year: "2024 – 2026", title: "M.S. in Cognitive Psychology", institution: "New York University", description: "Working with Prof. Sebastian Michelmann and Prof. Marcelo Mattar on memory and learning.", icon: "📚" },
-  { year: "Summer 2023", title: "Summer Research Intern, Brain & Cognitive Sciences", institution: "Massachusetts Institute of Technology", description: "Worked with Prof. Joshua Tenenbaum and Tianmin Shu on multi-agent language communication and Theory of Mind (ToM). Developed the Watch-Talk-Help framework.", icon: "🧠" },
-  { year: "2022 – 2024", title: "Research Intern, Multi-Agent Group", institution: "Beijing Institute for General Artificial Intelligence (BIGAI)", description: "Co-developed AdaSociety — an adaptive multi-agent environment with social structures. Published at NeurIPS 2024 Datasets and Benchmarks Track.", icon: "🤖" },
-  { year: "2021 – 2024", title: "B.E. in Computer Science & Technology", institution: "Tsinghua University", description: "Supervised by Prof. Hang Su. Focused on AI and neural networks.", icon: "💻" },
-  { year: "2020 – 2021", title: "Electronic Engineering (transferred to CS)", institution: "Tsinghua University", description: "Started university in EE before transferring to Computer Science to pursue interests in AI and cognition.", icon: "⚡" },
-  { year: "2014 – 2020", title: "High School", institution: "Tianjin No.1 High School", description: "Began research early — supervised by Prof. Mingming Cheng at Nankai University on computer vision. Built a pollution image classification system. Won Outstanding Paper and Outstanding Student awards at YINGCAIJIHUA. Invited student at China Theory Week 2018.", icon: "🏫" },
-] as const;
-
-// ─── Friends ────────────────────────────────────────────────
-export const FRIENDS = [
-  {
-    name: "Chenyang Zhao",
-    description: "本科好友。现在在做 AI Infra。",
-    website: "https://zhaochenyang20.github.io/Chayenne/",
-  },
-  {
-    name: "Haoran Geng",
-    description: "高中同学。本科在北大，现在跟 Pieter Abbeel 做 Robotics。",
-    website: "https://geng-haoran.github.io/",
-  },
-  {
-    name: "Kuocheng Wu",
-    description: "本科朋友。现在跟 Wanli Ouyang 做 AI for Science。",
-    website: "https://github.com/GuoCheng12",
-  },
-  {
-    name: "Penghan Wang",
-    description: "高中学弟。现在在普渡大学做 HPC。",
-    website: "https://scholar.google.com/citations?user=oy2HmI0AAAAJ&hl=en",
-  },
-  {
-    name: "Jialin Li",
-    description: "北大心理学本科，一起在 NYU 做认知科学，同样一起去 UCI 读 PhD。做 RL。",
-    website: "https://www.linkedin.com/in/jialin-li-831253318/",
-  },
-  {
-    name: "Xingbo Wang",
-    description: "本科通院实习的同学，现在北大直博，做 AI Agent。",
-    website: "https://jacksimbol.github.io/",
-  },
-  {
-    name: "Jiachen Yao",
-    description: "本科同学。在 Caltech 做 AI for Science。",
-    website: "https://www.jiachenyao.com/",
-  },
-  {
-    name: "Hengkai Tan",
-    description: "清华学长。在朱军老师组读博，做 Robotics。",
-    website: "https://www.linkedin.com/in/hengkai-tan-a31b88272/",
-  },
-  {
-    name: "Angkai Li",
-    description: "初中高中同学，现在在哈佛做数学。",
-    website: "https://science.psu.edu/news/angkai-li-selected-eberly-college-science-summer-2025-student-marshal",
-  },
-  {
-    name: "Yuxuan Dong",
-    description: "初中高中同学，现在在 UCLA 做 NLP。",
-    website: "https://www.linkedin.com/in/yuxuanshawndong/",
-  },
-  {
-    name: "Zihan Qiu",
-    description: "本科清华同学。现在在阿里巴巴做千问大模型。",
-    website: "https://www.linkedin.com/in/zihan-qiu-33a172249/",
-  },
+export const NAV = [
+  { label: "publications", href: "/#publications" },
+  { label: "projects", href: "/#projects" },
+  { label: "reading", href: "/reading" },
+  { label: "friends", href: "/friends" },
+  { label: "cv", href: "/cv" },
 ];
 
-// ─── Research Areas ──────────────────────────────────────────
-export const RESEARCH_FOCUS = [
-  { label: "Computational Memory & Learning", icon: "🧠" },
-  { label: "Multi-Agent Systems & Social Cognition", icon: "🤖" },
-  { label: "Theory of Mind & Communication", icon: "💬" },
-  { label: "Reinforcement Learning & Meta-Learning", icon: "🎯" },
-  { label: "Consciousness & Philosophy of Mind", icon: "🔮" },
-  { label: "NLP & Language Models", icon: "📝" },
-] as const;
-
-export const RESEARCH_PROJECTS = [
-  {
-    title: "Learning Distributed Representations with Complementary Components",
-    description: "Main MA project. Using Stable Diffusion to simulate distributed memory representations. Neo-cortical knowledge modeled by network weights; hippocampus as Modern Hopfield Network.",
-    details: [
-      "The model performs the Mnemonic Similarity Task (MST) with various depth of encoding. Its output patterns mirror findings from memory impairment in human behavior.",
-      "Fine-tuned 'expert' models can learn new information more effectively if the stimulus material pertains to the area of expertise.",
-      "Related representational similarity in model's latent space to the Natural Scenes Dataset (NSD). Deeper encoding yields better alignment with medial temporal lobe (MTL) regions.",
-      "Tested model predictions by designing a human behavioral experiment where participants reconstruct masked images.",
-    ],
-    advisors: "Sebastian Michelmann & Marcelo Mattar / NYU",
-    period: "Oct 2024 – Present",
-    tags: ["Diffusion Models", "Hopfield Networks", "fMRI", "Memory", "PsychoPy"],
-  },
-  {
-    title: "Watch-Talk-Help: Multi-Agent Communication with Theory of Mind",
-    description: "Determining when to engage in natural language communication to align human-robot goals. Added LLM-based agent belief parsing to the watch-and-help framework.",
-    details: [
-      "Improved on 'watch-and-help' (Puig et al., 2020) and 'online-watch-and-help' (Puig et al., 2023) by adding LLM-based agents' belief parsing.",
-      "Defined rules for updating agent beliefs and goals through natural language interaction.",
-    ],
-    advisors: "Tianmin Shu & Joshua Tenenbaum / MIT",
-    period: "Jun – Sep 2023",
-    tags: ["LLM", "Theory of Mind", "Multi-Agent"],
-  },
-  {
-    title: "AdaSociety: Adaptive Environment for Multi-Agent Decision-Making",
-    description: "Grid-world environment benchmark for studying generalized social behavior. Dynamics consist of resources, events, and agents. Published at NeurIPS 2024.",
-    details: [
-      "Agents gather resources to make higher products through engaging events.",
-      "Deployed MAPPO, MADDPG via RLLib for benchmarking.",
-    ],
-    advisors: "Siyuan Qi, Xue Feng / PKU & BIGAI",
-    period: "Jun 2023 – Jun 2024",
-    tags: ["MAPPO", "Social Cognition", "RLLib", "NeurIPS 2024"],
-  },
-  {
-    title: "Emergent Communication in Multi-Agent RL",
-    description: "Generalizing beyond traditional referential game settings using cooperative, interactive environments for emergent language communication.",
-    details: [],
-    advisors: "Hang Su / Tsinghua",
-    period: "2023 – 2024",
-    tags: ["Emergent Communication", "RL", "Language"],
-  },
-  {
-    title: "Hierarchical RL & Meta-RL for Task Representations",
-    description: "Exploring hierarchical reinforcement learning and meta-RL for task representations and goal compositionality in sparse-rewarded environments.",
-    details: [],
-    advisors: "Marcelo Mattar & Qihong Lu / NYU",
-    period: "2025",
-    tags: ["Meta-RL", "Hierarchical RL"],
-  },
-  {
-    title: "Citation Network as Climate Model",
-    description: "Building a citation network using arXiv and Google Scholar. Encoding the graph in high-dimensional space where nodes = density, edges = flow — a continuous climate model analogy.",
-    details: [],
-    advisors: "Self-directed / NYU",
-    period: "Summer 2025",
-    tags: ["Graph Networks", "Topology"],
-  },
-  {
-    title: "BlockScan: Blockchain Anomaly Detection",
-    description: "LLM-based anomaly detection on Solana blockchain transactions. Multi-threaded preprocessing, LoRA fine-tuning. Published at NeurIPS 2025.",
-    details: [],
-    advisors: "Xinyu Xing & Wenbo Guo / Northwestern",
-    period: "Mar – Jun 2024",
-    tags: ["LLM", "Blockchain", "NeurIPS 2025"],
-  },
-  {
-    title: "Chinese Financial Model for Stock Prediction",
-    description: "Transformer-based model trained on 15GB crawled market text. Fine-tuning pipeline across Macro, Meso, and Micro levels.",
-    details: [],
-    advisors: "Maosong Sun / Tsinghua",
-    period: "Feb – Sep 2022",
-    tags: ["NLP", "Transformers", "Finance"],
-  },
-  {
-    title: "Self-Supervised ViT on ImageNet-1K",
-    description: "Hand-implemented ViT backbone in encoder-decoder-unmasker architecture. Competitive transfer to classification and low-level vision.",
-    details: [],
-    advisors: "Self-directed",
-    period: "Dec 2021 – Feb 2022",
-    tags: ["Self-supervised", "ViT", "Computer Vision"],
-  },
-  {
-    title: "QA Model with BM25 & BERT Retrieval",
-    description: "Curated 1M+ Zhihu QA pairs. Built BM25 and BERT retrieval, integrated into LongLM pretraining. Surpassed baselines on BLEU/ROUGE.",
-    details: [],
-    advisors: "Minlie Huang / Tsinghua",
-    period: "Sep 2021 – Nov 2022",
-    tags: ["QA", "Retrieval", "LLM"],
-  },
-  {
-    title: "Pollution Image Classification",
-    description: "High school project. Crawled 10k+ images, SVM classifier with hand-crafted features. Won Outstanding Paper Award at YINGCAIJIHUA.",
-    details: [],
-    advisors: "Mingming Cheng / Nankai University",
-    period: "Dec 2017 – Oct 2019",
-    tags: ["Computer Vision", "SVM"],
-  },
+export const INTRO = [
+  `I'm a first-year PhD student in Cognitive Sciences at UC Irvine, advised by [Mark Steyvers](${P.steyvers}) and [Aaron Bornstein](${P.bornstein}). With Mark I work on how AI could help people learn, starting from what it looks like when someone is stuck. Aaron and I model how foragers spread over shared resources, and whether groups do best near the edge of chaos.`,
+  `Over the past few years I've worked on models of episodic memory, theory of mind in language models, multi-agent environments, the dynamics of group behavior, human–AI interaction in learning, and, on the side, anomaly detection in blockchain transactions. Outside of projects I keep coming back to cellular automata, chaotic attractors and spiking networks, to some mathematics (algebraic topology, fractal geometry), and to philosophy of mind and of logic, especially questions about perception and consciousness.`,
+  `Before UCI I did an M.S. at NYU with [Sebastian Michelmann](${P.michelmann}) and [Marcelo Mattar](${P.mattar}), working on episodic memory encoding with generative models. I studied computer science at Tsinghua and worked in BIGAI's multi-agent group from 2022 to 2024. In summer 2023 I was at MIT with [Tianmin Shu](${P.shu}) and [Josh Tenenbaum](${P.tenenbaum}), working on theory of mind.`,
 ];
 
-// ─── Publications ────────────────────────────────────────────
+export const NEWS = [
+  { date: "2026-10", text: "Preprint on episodic memory encoding, with Marcelo Mattar and Sebastian Michelmann, is on [bioRxiv](https://www.biorxiv.org/content/10.64898/2026.10.18.759853v1). Code and data are on [Zenodo](https://doi.org/10.5281/zenodo.23093152)." },
+  { date: "2026-10", text: "[HopToM](https://arxiv.org/abs/2610.17777), on higher-order theory of mind in LLMs, is on arXiv." },
+  { date: "2026-09", text: "Started my PhD at UC Irvine." },
+  { date: "2026-05", text: "[KnotBench](https://arxiv.org/abs/2605.09900) is on arXiv." },
+];
+
+// **Hao Liu** marks my name in author lists.
 export const PUBLICATIONS = [
-  { title: "BlockScan: Detecting Anomalies in Blockchain Transactions", authors: "Yu, J., Wu, X., **Liu, H.**, Guo, W., & Xing, X.", venue: "The Thirty-ninth Annual Conference on Neural Information Processing Systems (NeurIPS 2025)", year: 2025, type: "conference", links: { paper: "https://arxiv.org/pdf/2410.04039" } },
-  { title: "AdaSociety: An Adaptive Environment with Social Structures for Multi-Agent Decision-Making", authors: "Huang, Y., Wang, X., **Liu, H.**, Kong, F., Qin, A., Tang, M., Zhu, S., Bi, M., Qi, S., & Feng, X.", venue: "Advances in Neural Information Processing Systems, 37, Datasets and Benchmarks Track (NeurIPS 2024)", year: 2024, type: "conference", links: { paper: "https://neurips.cc/virtual/2024/poster/97511" } },
-  { title: "Learning Distributed Representations with Complementary Components", authors: "**Liu, H.**, Mattar, M., Michelmann, S.", venue: "In Preparation", year: 2025, type: "preprint", links: {} },
+  {
+    title: "Learning distributed representations with complementary components: A generative approximation framework for episodic memory encoding",
+    authors: "**Hao Liu**, Marcelo Mattar, Sebastian Michelmann",
+    venue: "bioRxiv, 2026",
+    links: [
+      { label: "bioRxiv", url: "https://www.biorxiv.org/content/10.64898/2026.10.18.759853v1" },
+      { label: "code & data", url: "https://doi.org/10.5281/zenodo.23093152" },
+    ],
+    bib: `@article{liu2026learning,
+  title   = {Learning distributed representations with complementary components: A generative approximation framework for episodic memory encoding},
+  author  = {Liu, Hao and Mattar, Marcelo and Michelmann, Sebastian},
+  journal = {bioRxiv},
+  year    = {2026},
+  doi     = {10.64898/2026.10.18.759853}
+}`,
+  },
+  {
+    title: "Beyond Belief Nesting: Rethinking Higher-Order Theory of Mind in Large Language Models",
+    authors: "Shanshan You, Zhengqi Wang, **Hao Liu**, Yuqin Liu, Ya He, Xin Hao, Liyuan Wang",
+    venue: "arXiv:2610.17777, 2026",
+    links: [{ label: "arXiv", url: "https://arxiv.org/abs/2610.17777" }],
+    bib: `@article{you2026beyond,
+  title   = {Beyond Belief Nesting: Rethinking Higher-Order Theory of Mind in Large Language Models},
+  author  = {You, Shanshan and Wang, Zhengqi and Liu, Hao and Liu, Yuqin and He, Ya and Hao, Xin and Wang, Liyuan},
+  journal = {arXiv preprint arXiv:2610.17777},
+  year    = {2026}
+}`,
+  },
+  {
+    title: "The Gordian Knot for VLMs: Diagrammatic Knot Reasoning as a Hard Benchmark",
+    authors: "**Hao Liu**, Jicheng Liu",
+    venue: "arXiv:2605.09900, 2026",
+    links: [{ label: "arXiv", url: "https://arxiv.org/abs/2605.09900" }],
+    bib: `@article{liu2026gordian,
+  title   = {The Gordian Knot for VLMs: Diagrammatic Knot Reasoning as a Hard Benchmark},
+  author  = {Liu, Hao and Liu, Jicheng},
+  journal = {arXiv preprint arXiv:2605.09900},
+  year    = {2026}
+}`,
+  },
+  {
+    title: "BlockScan: Detecting Anomalies in Blockchain Transactions",
+    authors: "Jiahao Yu, Xian Wu, **Hao Liu**, Wenbo Guo, Xinyu Xing",
+    venue: "NeurIPS 2025",
+    links: [{ label: "arXiv", url: "https://arxiv.org/abs/2410.04039" }],
+    bib: `@inproceedings{yu2025blockscan,
+  title     = {BlockScan: Detecting Anomalies in Blockchain Transactions},
+  author    = {Yu, Jiahao and Wu, Xian and Liu, Hao and Guo, Wenbo and Xing, Xinyu},
+  booktitle = {Advances in Neural Information Processing Systems},
+  year      = {2025}
+}`,
+  },
+  {
+    title: "AdaSociety: An Adaptive Environment with Social Structures for Multi-Agent Decision-Making",
+    authors: "Yizhe Huang, Xingbo Wang, **Hao Liu**, Fanqi Kong, Aoyang Qin, Min Tang, Song-Chun Zhu, Mingjie Bi, Siyuan Qi, Xue Feng",
+    venue: "NeurIPS 2024, Datasets and Benchmarks",
+    links: [
+      { label: "arXiv", url: "https://arxiv.org/abs/2411.03865" },
+      { label: "code", url: "https://github.com/bigai-ai/AdaSociety" },
+    ],
+    bib: `@inproceedings{huang2024adasociety,
+  title     = {AdaSociety: An Adaptive Environment with Social Structures for Multi-Agent Decision-Making},
+  author    = {Huang, Yizhe and Wang, Xingbo and Liu, Hao and Kong, Fanqi and Qin, Aoyang and Tang, Min and Zhu, Song-Chun and Bi, Mingjie and Qi, Siyuan and Feng, Xue},
+  booktitle = {Advances in Neural Information Processing Systems},
+  volume    = {37},
+  year      = {2024}
+}`,
+  },
 ];
 
-// ─── Skills ──────────────────────────────────────────────────
-export const SKILL_CATEGORIES = [
-  { title: "Programming Languages", skills: ["Python", "C", "C++", "CUDA", "JavaScript", "HTML/CSS", "FPGA"] },
-  { title: "ML / Research Frameworks", skills: ["PyTorch", "Ray / RLLib", "Triton", "PsychoPy", "Gym", "MATLAB"] },
-  { title: "Research Areas", skills: ["Computational Neuroscience", "Deep Learning & Neural Networks", "Reinforcement Learning", "Cognitive Psychology", "Natural Language Processing", "Computer Vision", "Multi-Agent Systems", "Theory of Mind", "Consciousness Modelling", "Algebraic Topology"] },
-  { title: "Languages", skills: ["Mandarin Chinese (Native)", "English (TOEFL 113/120)"] },
-];
+type Link = { label: string; url: string };
+type Figure = { src: string; alt: string; caption: string };
 
-export const COURSES = [
-  { name: "Stanford CS231n", topic: "Computer Vision", period: "Sep–Dec 2020" },
-  { name: "Introduction to RL", topic: "Reinforcement Learning", period: "May–Aug 2021" },
-  { name: "Stanford CS224w", topic: "Graph Neural Networks", period: "May–Aug 2021" },
-  { name: "UCB CS285", topic: "Deep Reinforcement Learning", period: "May–Aug 2021" },
-  { name: "Next Step of ML", topic: "Machine Learning", period: "Jan–Feb 2021" },
-  { name: "Stanford CS224n", topic: "NLP with Deep Learning", period: "Jan–Feb 2022" },
-  { name: "Geometric Deep Learning", topic: "Geometry & DL", period: "Jun–Sep 2022" },
-  { name: "Stanford CS330", topic: "Deep Multi-Task & Meta Learning", period: "Sep–Dec 2022" },
-  { name: "Categories for AI", topic: "Category Theory & AI", period: "Mar–Dec 2023" },
-];
-
-// ─── Reading List ────────────────────────────────────────────
-export const BOOKS = [
-  { title: "The Emotion Machine", author: "Marvin Minsky", category: "AI & Mind" },
-  { title: "Descartes' Error: Emotion, Reason and the Human Brain", author: "Antonio Damasio", category: "Neuroscience" },
-  { title: "Letters Written During a Short Residence in Sweden, Norway and Denmark", author: "Mary Wollstonecraft", category: "Literature" },
-  { title: "Discours préliminaire de l'Encyclopédie", author: "D'Alembert", category: "Philosophy" },
-  { title: "南渡北归", author: "岳南", category: "History / 历史" },
-  { title: "一百个人的十年", author: "冯骥才", category: "History / 历史" },
-  { title: "红太阳是怎样升起的", author: "高华", category: "History / 历史" },
-  { title: "The Secrets of Words", author: "Noam Chomsky & Andrea Moro", category: "Linguistics" },
-  { title: "Brave New World", author: "Aldous Huxley", category: "Literature" },
-  { title: "The Handmaid's Tale", author: "Margaret Atwood", category: "Literature" },
-  { title: "Les années d'utopie (1968–1969)", author: "Jean-Claude Carrière", category: "History / 历史" },
-  { title: "Mathematics: The Loss of Certainty", author: "Morris Kline", category: "Mathematics" },
-  { title: "In Other Worlds: SF and the Human Imagination", author: "Margaret Atwood", category: "Literature" },
-  { title: "邮编100084", author: "邢周/南飞熊", category: "文学" },
-  { title: "En agosto nos vemos", author: "García Márquez", category: "Literature" },
-  { title: "Art as Therapy", author: "Alain de Botton", category: "Philosophy" },
-  { title: "The Testaments", author: "Margaret Atwood", category: "Literature" },
-  { title: "纽约客", author: "白先勇", category: "文学" },
-  { title: "故国人民有所思", author: "陈徒手", category: "History / 历史" },
-  { title: "Active Inference: The Free Energy Principle in Mind, Brain, and Behavior", author: "Thomas Parr, Giovanni Pezzulo, Karl J. Friston", category: "Neuroscience" },
-  { title: "Respiración artificial", author: "Ricardo Piglia", category: "Literature" },
-  { title: "What Are You Looking At? 150 Years of Modern Art", author: "Will Gompertz", category: "Art" },
-  { title: "The Lost Salt Gift of Blood", author: "Alistair MacLeod", category: "Literature" },
-  { title: "The Psychology of Invention in the Mathematical Field", author: "Jacques Hadamard", category: "Mathematics" },
-  { title: "聋哑时代", author: "双雪涛", category: "文学" },
-  { title: "比山更高", author: "宋明蔚", category: "文学" },
-  { title: "\"读书的料\"及其文化生产", author: "程猛", category: "社会学" },
-  { title: "当代小说二十家", author: "王德威", category: "文学" },
-  { title: "Eclaircissements", author: "Michel Serres & Bruno Latour", category: "Philosophy" },
-  { title: "Exhalation", author: "Ted Chiang", category: "Literature" },
-  { title: "重走——在公路、河流和驿道上寻找西南联大", author: "杨潇", category: "History / 历史" },
-  { title: "遍地风流", author: "阿城", category: "文学" },
-  { title: "Brief History of the Paradox", author: "Roy Sorensen", category: "Philosophy" },
-  { title: "Philosophy: A Historical Survey with Essential Readings", author: "Stumpf & Fieser", category: "Philosophy" },
-  { title: "外面是夏天", author: "金爱灿", category: "文学" },
-  { title: "The Phenomenological Mind", author: "Shaun Gallagher", category: "Philosophy" },
-  { title: "我的二本学生", author: "黄灯", category: "社会学" },
-  { title: "平原上的摩西", author: "双雪涛", category: "文学" },
-  { title: "The Revelations", author: "Erik Hoel", category: "Neuroscience" },
-  { title: "Nous n'avons jamais été modernes", author: "Bruno Latour", category: "Philosophy" },
-  { title: "The River of Consciousness", author: "Oliver Sacks", category: "Neuroscience" },
-];
-
-// ─── Professor Links ────────────────────────────────────────
-export const PROFESSOR_LINKS: Record<string, string> = {
-  "Sebastian Michelmann": "https://as.nyu.edu/faculty/sebastian-michelmann.html",
-  "Marcelo Mattar": "https://as.nyu.edu/faculty/marcelo-mattar.html",
-  "Hang Su": "https://www.cs.tsinghua.edu.cn/csen/info/1313/4403.htm",
-  "Joshua Tenenbaum": "https://web.mit.edu/cocosci/josh.html",
-  "Tianmin Shu": "https://www.tshu.io/",
-  "Mark Steyvers": "https://steyvers.socsci.uci.edu/",
-  "Aaron Bornstein": "https://aaron.bornstein.org/",
-  "Mingming Cheng": "https://mmcheng.net/cmm/",
-  "Xinyu Xing": "http://xinyuxing.org/",
-  "Wenbo Guo": "https://henrygwb.github.io/",
+// Newest first. `paper` decides the filled or open dot. Projects with
+// `bullets` get the long form, the rest are one line.
+export type Project = {
+  years: string;
+  title: string;
+  where?: string;
+  paper: boolean;
+  ongoing?: boolean;
+  links?: Link[];
+  figure?: Figure;
+  bullets?: string[];
 };
 
-// ─── Footer ──────────────────────────────────────────────────
-export const FOOTER_DATA = [
-  { title: "Academic", data: [
-    { name: "Google Scholar", icon: SiGooglescholar, link: "https://scholar.google.com/citations?user=PLACEHOLDER" },
-    { name: "GitHub", icon: RxGithubLogo, link: "https://github.com/haoliu4391" },
-  ]},
-  { title: "Social", data: [
-    { name: "Twitter / X", icon: RxTwitterLogo, link: "https://x.com/hao_liu_cogsci" },
-    { name: "LinkedIn", icon: RxLinkedinLogo, link: "https://linkedin.com" },
-  ]},
-  { title: "Contact", data: [
-    { name: "hl4220@nyu.edu", icon: HiOutlineMail, link: "mailto:hl4220@nyu.edu" },
-  ]},
-] as const;
+export const PROJECTS: Project[] = [
+  {
+    years: "2026–",
+    title: "Stuckness and AI intervention in learning",
+    where: `UC Irvine, with [Mark Steyvers](${P.steyvers})`,
+    paper: false,
+    ongoing: true,
+    bullets: [
+      "When should an AI step in to help someone learn, and with what? People often learn most from problems they fail some of the time, so help that comes too early can backfire.",
+      "We start by telling productive struggle apart from being stuck, using only moves, restarts and timing in Sokoban puzzles of graded difficulty.",
+      "Next come experiments in which an AI steps in at different moments and with different kinds of help.",
+    ],
+  },
+  {
+    years: "2026–",
+    title: "Group foraging and the edge of chaos",
+    where: `UC Irvine, with [Aaron Bornstein](${P.bornstein})`,
+    paper: false,
+    ongoing: true,
+    bullets: [
+      "How does a group spread itself over shared resources, and what does each forager need to predict, or hear from others, to get there?",
+      "Our working idea is that groups do best near the edge of chaos, where they don't waste moves but can still follow resources that shift.",
+      "We study this with agent-based simulations of foragers who forecast yield and crowding and pass on what they saw, and plan a version of the task for groups of people.",
+    ],
+  },
+  {
+    years: "2026",
+    title: "Higher-order theory of mind in LLMs (HopToM)",
+    where: "Tsinghua, with Liyuan Wang's group",
+    paper: true,
+    links: [{ label: "arXiv", url: "https://arxiv.org/abs/2610.17777" }],
+    figure: { src: "/figures/hoptom.webp", alt: "Figure 2 of the HopToM paper: belief nesting can overstate effective order", caption: "Fig. 2 of the paper" },
+    bullets: [
+      "Many nominally higher-order theory-of-mind questions admit lower-order shortcuts; defining a question's effective order by the distinct events behind each belief prefix shows this inflation across existing benchmarks.",
+      "HopToM has questions certified to need full-order reasoning. Four frontier LLMs fall from 73.5% at first order to 20.0% at fourth order, and human participants also struggle.",
+      "HopTrace encodes each interaction once into perspective records and answers nested queries from them, gaining 22.0 and 38.5 points at fourth and fifth order with 20 to 39 times fewer tokens than multi-call methods.",
+    ],
+  },
+  {
+    years: "2026",
+    title: "Knot diagrams as a test for vision-language models (KnotBench)",
+    where: "with Jicheng Liu",
+    paper: true,
+    links: [{ label: "arXiv", url: "https://arxiv.org/abs/2605.09900" }],
+    figure: { src: "/figures/knotbench.webp", alt: "Three drawings of the trefoil knot with 3, 5 and 7 crossings", caption: "Fig. 2 of the paper: three drawings of the same knot" },
+    bullets: [
+      "858,318 knot diagrams from 1,951 prime knots with 3 to 19 crossings. Answers are checked automatically against each knot's canonical signature in Regina.",
+      "14 tasks in four families: whether two diagrams show the same knot, what a move will do, which knot it is, and translating between the drawing and a symbolic code. Each task comes in an image and a symbol version, which separates failures of perception from failures of operating on the structure.",
+      "Frontier models, with and without extended thinking, sit near random on many tasks. They seem to pick up features of a diagram but cannot simulate moves on them.",
+    ],
+  },
+  {
+    years: "2024–26",
+    title: "Episodic memory encoding as generative approximation",
+    where: `NYU, with [Sebastian Michelmann](${P.michelmann}) & [Marcelo Mattar](${P.mattar})`,
+    paper: true,
+    links: [
+      { label: "bioRxiv", url: "https://www.biorxiv.org/content/10.64898/2026.10.18.759853v1" },
+      { label: "code", url: "https://doi.org/10.5281/zenodo.23093152" },
+    ],
+    figure: { src: "/figures/memory.webp", alt: "Figure 2A to C of the memory paper: reconstructions over inversion steps and the encoding and reinstatement schematic", caption: "Fig. 2A–C of the paper" },
+    bullets: [
+      "A memory is encoded by searching for a starting point from which a pretrained generative model can regenerate the input with its frozen weights. No separate inverse mapping between cortex and hippocampus is needed, and searching longer buys a more precise memory.",
+      "Implemented with a toy model and with Stable Diffusion and StyleGAN-XL. Shallow encoding selectively impairs lure rejection on the Mnemonic Similarity Task, as in older adults, and models fine-tuned on a domain need fewer steps for images from that domain.",
+      "The latent starting points have a representational geometry like the medial temporal lobe, and reinstatement passes through the visual hierarchy in reverse order.",
+    ],
+  },
+  {
+    years: "2025",
+    title: "Hierarchical and meta-RL for task representations in sparse-reward environments.",
+    where: `NYU, with [Marcelo Mattar](${P.mattar}) & Qihong Lu`,
+    paper: false,
+  },
+  {
+    years: "2025",
+    title: "A side project that treats a citation graph like a weather map, with paper density as pressure and citations as flow.",
+    paper: false,
+  },
+  {
+    years: "2024",
+    title: "Anomaly detection in blockchain transactions (BlockScan)",
+    where: `Northwestern, with [Xinyu Xing](${P.xing}) & [Wenbo Guo](${P.guo})`,
+    paper: true,
+    links: [{ label: "arXiv", url: "https://arxiv.org/abs/2410.04039" }],
+    figure: { src: "/figures/blockscan.webp", alt: "Figure 1 of the BlockScan paper: how transactions are tokenized", caption: "Fig. 1 of the paper" },
+    bullets: [
+      "A Transformer built for blockchain transactions, which mix chain-specific tokens, text and numbers. A modular tokenizer keeps the three in balance, and pretraining uses a masked language modeling objective adapted to long transaction sequences.",
+      "On Ethereum and Solana it keeps false positives low. On Solana it was the only method tested that found the anomalous transactions with high accuracy.",
+    ],
+  },
+  {
+    years: "2023–24",
+    title: "Emergent communication in cooperative multi-agent RL, beyond referential games.",
+    where: `Tsinghua, with [Hang Su](${P.su})`,
+    paper: false,
+  },
+  {
+    years: "2023",
+    title: "LLM-based agents that track each other's beliefs and decide when talking helps in a household task (Watch-Talk-Help).",
+    where: `MIT, with [Tianmin Shu](${P.shu}) & [Josh Tenenbaum](${P.tenenbaum})`,
+    paper: false,
+  },
+  {
+    years: "2022–24",
+    title: "A multi-agent environment with changing social structure (AdaSociety)",
+    where: "BIGAI, with Siyuan Qi & Xue Feng",
+    paper: true,
+    links: [
+      { label: "arXiv", url: "https://arxiv.org/abs/2411.03865" },
+      { label: "code", url: "https://github.com/bigai-ai/AdaSociety" },
+    ],
+    figure: { src: "/figures/adasociety.webp", alt: "Figure 1 of the AdaSociety paper: physical and social components of the environment", caption: "Fig. 1 of the paper" },
+    bullets: [
+      "A customizable multi-agent environment whose state and action spaces grow as agents act. Social structure is explicit and can change, decides how rewards and information are shared, and is varied across three mini-games.",
+      "Some social structures improve both individual and group outcomes, but current RL and LLM-based agents make little use of them.",
+    ],
+  },
+  {
+    years: "2022",
+    title: "A Chinese financial language model trained on 15 GB of market text.",
+    where: "Tsinghua, with Maosong Sun",
+    paper: false,
+  },
+  {
+    years: "2021–22",
+    title: "Retrieval-based QA over a million Zhihu question–answer pairs, with BM25 and BERT.",
+    where: "Tsinghua, with Minlie Huang",
+    paper: false,
+  },
+  {
+    years: "2021–22",
+    title: "Self-supervised ViT on ImageNet-1K, written from scratch.",
+    paper: false,
+  },
+  {
+    years: "2017–19",
+    title: "Classifying pollution images with hand-crafted features, my high school project.",
+    where: `Nankai, with [Ming-Ming Cheng](${P.cheng})`,
+    paper: false,
+  },
+];
+
+export const EDUCATION = [
+  { years: "2026–", text: "PhD, Cognitive Sciences, UC Irvine" },
+  { years: "2024–26", text: "M.S., Cognitive Psychology, New York University" },
+  { years: "2023", text: "Summer research intern, Brain and Cognitive Sciences, MIT" },
+  { years: "2022–24", text: "Research intern, multi-agent group, BIGAI" },
+  { years: "2020–24", text: "B.E., Computer Science and Technology, Tsinghua University (first year in Electronic Engineering)" },
+];
