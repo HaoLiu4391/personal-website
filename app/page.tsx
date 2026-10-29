@@ -122,7 +122,7 @@ export default function Home() {
 
       <section id="projects">
         <h2>Projects</h2>
-        <p className="legend">● has a paper &nbsp;&nbsp;○ no paper</p>
+        <p className="legend">● has a paper</p>
         <ol className="projects">
           {PROJECTS.map((p) => (
             <ProjectItem key={p.title} p={p} />
