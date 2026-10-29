@@ -150,7 +150,7 @@ export const PROJECTS: Project[] = [
     ],
     figures: [
       { src: "/figures/sokoban_game.webp", alt: "The puzzle screen of the online Sokoban experiment: board, boxes on goals, move count, timer and a restart button", caption: "The puzzle screen in the online experiment", width: 600 },
-      { src: "/figures/sokoban_boxchanges.webp", alt: "Scatter plot of box changes against designer difficulty ratings for 831 Sokoban levels, with the median rating per box-change count", caption: "Box changes along the shortest solution vs. designer difficulty, 831 levels. We grade puzzles by box changes.", width: 760 },
+      { src: "/figures/sokoban_states.webp", alt: "Three views of a one-box tutorial level: the start, the solved board, and a dead state with the box pushed into a corner", caption: "A tutorial level: start, solved, and a dead state (the box is stuck in a corner)" },
     ],
   },
   {
@@ -165,7 +165,7 @@ export const PROJECTS: Project[] = [
       "Agent-based models with depleting patches, in which foragers forecast yield and crowding and share what they saw by word of mouth. We analyze them with bifurcation diagrams and Lyapunov exponents, and plan a multiplayer version for human groups.",
     ],
     figures: [
-      { src: "/figures/foraging_regimes.webp", alt: "Two maps over memory alpha and choice sharpness beta: long-run regimes from fixed point to chaos, and the largest Lyapunov exponent", caption: "Long-run regimes of the crowd model over memory α and choice sharpness β, and the largest Lyapunov exponent" },
+      { src: "/figures/foraging_schematic.webp", alt: "Schematic of two patches with foragers; one forager arrives at patch A from patch B and reports what B looked like a step ago", caption: "Two patches in the model. A forager arriving from B brings news of B that is one step old." },
       { src: "/figures/foraging_period3.webp", alt: "Bifurcation diagram over beta with a highlighted period-3 window inside a chaotic region, and the Lyapunov exponent below", caption: "Bifurcation diagram over β with a period-3 window inside the chaotic region; Lyapunov exponent below", width: 760 },
     ],
   },
