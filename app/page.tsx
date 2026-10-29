@@ -22,6 +22,15 @@ function ProjectItem({ p }: { p: Project }) {
     );
   }
 
+  const figures = p.figures?.map((f) => (
+    <figure key={f.src} style={f.width ? { maxWidth: f.width } : undefined}>
+      <a href={`${BASE}${f.src}`}>
+        <img src={`${BASE}${f.src}`} alt={f.alt} loading="lazy" />
+      </a>
+      <figcaption>{f.caption}</figcaption>
+    </figure>
+  ));
+
   return (
     <li className="project long">
       <span className="years">{p.years}</span>
@@ -38,19 +47,14 @@ function ProjectItem({ p }: { p: Project }) {
           ))}
         </div>
         <div className="p-body">
-          {p.figure && (
-            <figure>
-              <a href={`${BASE}${p.figure.src}`}>
-                <img src={`${BASE}${p.figure.src}`} alt={p.figure.alt} loading="lazy" />
-              </a>
-              <figcaption>{p.figure.caption}</figcaption>
-            </figure>
-          )}
+          {/* papers lead with their figure; ongoing projects lead with the questions */}
+          {!p.ongoing && figures}
           <ul>
             {p.bullets.map((b) => (
               <li key={b}>{b}</li>
             ))}
           </ul>
+          {p.ongoing && figures}
         </div>
       </div>
     </li>

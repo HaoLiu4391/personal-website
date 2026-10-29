@@ -120,7 +120,8 @@ export const PUBLICATIONS = [
 ];
 
 type Link = { label: string; url: string };
-type Figure = { src: string; alt: string; caption: string };
+// width caps the figure in CSS pixels; without it the figure spans the text column.
+type Figure = { src: string; alt: string; caption: string; width?: number };
 
 // Newest first. `paper` decides the filled or open dot. Projects with
 // `bullets` get the long form, the rest are one line.
@@ -131,7 +132,7 @@ export type Project = {
   paper: boolean;
   ongoing?: boolean;
   links?: Link[];
-  figure?: Figure;
+  figures?: Figure[];
   bullets?: string[];
 };
 
@@ -147,6 +148,10 @@ export const PROJECTS: Project[] = [
       "We build Bayesian cognitive models that infer, from moves, restarts and response times, whether a solver is in productive struggle or stuck.",
       "Data come from online Sokoban experiments. Later ones vary hint timing and hint type, next-step versus strategy-level.",
     ],
+    figures: [
+      { src: "/figures/sokoban_game.webp", alt: "The puzzle screen of the online Sokoban experiment: board, boxes on goals, move count, timer and a restart button", caption: "The puzzle screen in the online experiment", width: 600 },
+      { src: "/figures/sokoban_boxchanges.webp", alt: "Scatter plot of box changes against designer difficulty ratings for 831 Sokoban levels, with the median rating per box-change count", caption: "Box changes along the shortest solution vs. designer difficulty, 831 levels. We grade puzzles by box changes.", width: 760 },
+    ],
   },
   {
     years: "2026–",
@@ -159,6 +164,10 @@ export const PROJECTS: Project[] = [
       "How do groups of learning agents converge to the ideal free distribution, and what does each forager need to predict about the patches and the other foragers?",
       "Agent-based models with depleting patches, in which foragers forecast yield and crowding and share what they saw by word of mouth. We analyze them with bifurcation diagrams and Lyapunov exponents, and plan a multiplayer version for human groups.",
     ],
+    figures: [
+      { src: "/figures/foraging_regimes.webp", alt: "Two maps over memory alpha and choice sharpness beta: long-run regimes from fixed point to chaos, and the largest Lyapunov exponent", caption: "Long-run regimes of the crowd model over memory α and choice sharpness β, and the largest Lyapunov exponent" },
+      { src: "/figures/foraging_period3.webp", alt: "Bifurcation diagram over beta with a highlighted period-3 window inside a chaotic region, and the Lyapunov exponent below", caption: "Bifurcation diagram over β with a period-3 window inside the chaotic region; Lyapunov exponent below", width: 760 },
+    ],
   },
   {
     years: "2026",
@@ -166,7 +175,7 @@ export const PROJECTS: Project[] = [
     where: "Tsinghua, with Liyuan Wang's group",
     paper: true,
     links: [{ label: "arXiv", url: "https://arxiv.org/abs/2610.17777" }],
-    figure: { src: "/figures/hoptom.webp", alt: "Figure 2 of the HopToM paper: belief nesting can overstate effective order", caption: "Fig. 2 of the paper" },
+    figures: [{ src: "/figures/hoptom.webp", alt: "Figure 2 of the HopToM paper: belief nesting can overstate effective order", caption: "Fig. 2 of the paper" }],
     bullets: [
       "Many benchmark questions that look higher-order can be answered with lower-order reasoning. We define a question's effective order by the distinct events behind each belief prefix, and by that measure existing benchmarks overstate the order they test.",
       "HopToM has questions certified to need full-order reasoning. Accuracy of four frontier LLMs falls from 73.5% at first order to 20.0% at fourth order.",
@@ -179,7 +188,7 @@ export const PROJECTS: Project[] = [
     where: "with Jicheng Liu",
     paper: true,
     links: [{ label: "arXiv", url: "https://arxiv.org/abs/2605.09900" }],
-    figure: { src: "/figures/knotbench.webp", alt: "Three drawings of the trefoil knot with 3, 5 and 7 crossings", caption: "Fig. 2 of the paper: three drawings of the same knot" },
+    figures: [{ src: "/figures/knotbench.webp", alt: "Three drawings of the trefoil knot with 3, 5 and 7 crossings", caption: "Fig. 2 of the paper: three drawings of the same knot" }],
     bullets: [
       "858,318 knot diagrams from 1,951 prime knots with crossing numbers 3 to 19. Answers are checked against Regina's canonical knot signature, so no human labels are involved.",
       "14 tasks in four families (equivalence judgment, move prediction, identification, cross-modal grounding). Each task has an image and a symbolic version, which separates failures of perception from failures of operating on the structure.",
@@ -195,7 +204,7 @@ export const PROJECTS: Project[] = [
       { label: "bioRxiv", url: "https://www.biorxiv.org/content/10.64898/2026.10.18.759853v1" },
       { label: "code", url: "https://doi.org/10.5281/zenodo.23093152" },
     ],
-    figure: { src: "/figures/memory.webp", alt: "Figure 2A to C of the memory paper: reconstructions over inversion steps and the encoding and reinstatement schematic", caption: "Fig. 2A–C of the paper" },
+    figures: [{ src: "/figures/memory.webp", alt: "Figure 2A to C of the memory paper: reconstructions over inversion steps and the encoding and reinstatement schematic", caption: "Fig. 2A–C of the paper" }],
     bullets: [
       "A pretrained generative network approximates each input through its frozen weights, and the memory is the starting point from which the same weights reinstate it. This removes the need for mutually invertible cortical-hippocampal mappings and trades computational effort for mnemonic precision.",
       "Implemented with a toy model and with large image generators (Stable Diffusion, StyleGAN-XL). Shallow encoding selectively impairs lure rejection on the Mnemonic Similarity Task, as in aging, and domain-finetuned models need fewer approximation steps for in-domain images.",
@@ -219,7 +228,7 @@ export const PROJECTS: Project[] = [
     where: `Northwestern, with [Xinyu Xing](${P.xing}) & [Wenbo Guo](${P.guo})`,
     paper: true,
     links: [{ label: "arXiv", url: "https://arxiv.org/abs/2410.04039" }],
-    figure: { src: "/figures/blockscan.webp", alt: "Figure 1 of the BlockScan paper: how transactions are tokenized", caption: "Fig. 1 of the paper" },
+    figures: [{ src: "/figures/blockscan.webp", alt: "Figure 1 of the BlockScan paper: how transactions are tokenized", caption: "Fig. 1 of the paper" }],
     bullets: [
       "A Transformer built for blockchain transactions, which mix chain-specific tokens with text and numbers. A modular tokenizer balances information across these modalities, and pretraining uses a masked language modeling objective adapted to long transaction sequences.",
       "On Ethereum and Solana it keeps false positives low. On Solana it was the only method tested that found the anomalous transactions with high accuracy.",
@@ -246,7 +255,7 @@ export const PROJECTS: Project[] = [
       { label: "arXiv", url: "https://arxiv.org/abs/2411.03865" },
       { label: "code", url: "https://github.com/bigai-ai/AdaSociety" },
     ],
-    figure: { src: "/figures/adasociety.webp", alt: "Figure 1 of the AdaSociety paper: physical and social components of the environment", caption: "Fig. 1 of the paper" },
+    figures: [{ src: "/figures/adasociety.webp", alt: "Figure 1 of the AdaSociety paper: physical and social components of the environment", caption: "Fig. 1 of the paper" }],
     bullets: [
       "A customizable multi-agent environment whose state and action spaces grow as agents act. Social structure is an explicit, changeable part of the state and decides how rewards and information are shared. Three mini-games vary it.",
       "Some social structures improve both individual and group outcomes, but current RL and LLM-based agents make little use of them.",
