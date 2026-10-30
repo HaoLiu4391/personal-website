@@ -121,7 +121,8 @@ export const PUBLICATIONS = [
 
 type Link = { label: string; url: string };
 // width caps the figure in CSS pixels; without it the figure spans the text column.
-type Figure = { src: string; alt: string; caption: string; width?: number };
+// dark is an optional version drawn in the dark palette, shown when the page is dark.
+type Figure = { src: string; dark?: string; alt: string; caption: string; width?: number };
 
 // Newest first. `paper` decides the filled or open dot. Projects with
 // `bullets` get the long form, the rest are one line.
@@ -149,8 +150,7 @@ export const PROJECTS: Project[] = [
       "Data come from online Sokoban experiments. Later ones vary hint timing and hint type, next-step versus strategy-level.",
     ],
     figures: [
-      { src: "/figures/sokoban_game.webp", alt: "The puzzle screen of the online Sokoban experiment: board, boxes on goals, move count, timer and a restart button", caption: "The puzzle screen in the online experiment", width: 600 },
-      { src: "/figures/sokoban_states.webp", alt: "Three views of a one-box tutorial level: the start, the solved board, and a dead state with the box pushed into a corner", caption: "A tutorial level: start, solved, and a dead state (the box is stuck in a corner)" },
+      { src: "/figures/sokoban_levels.webp", dark: "/figures/sokoban_levels_dark.webp", alt: "Three small Sokoban levels drawn flat: grey walls, black boxes, green goal dots, boxes already on goals in green, and a ring for the player", caption: "Push every box onto a green dot; the ring is the player. Three Microban levels by David W. Skinner.", width: 760 },
     ],
   },
   {
@@ -165,8 +165,8 @@ export const PROJECTS: Project[] = [
       "Agent-based models with depleting patches, in which foragers forecast yield and crowding and share what they saw by word of mouth. We analyze them with bifurcation diagrams and Lyapunov exponents, and plan a multiplayer version for human groups.",
     ],
     figures: [
-      { src: "/figures/foraging_schematic.webp", alt: "Schematic of two patches with foragers; one forager arrives at patch A from patch B and reports what B looked like a step ago", caption: "Two patches in the model. A forager arriving from B brings news of B that is one step old." },
-      { src: "/figures/foraging_period3.webp", alt: "Bifurcation diagram over beta with a highlighted period-3 window inside a chaotic region, and the Lyapunov exponent below", caption: "Bifurcation diagram over β with a period-3 window inside the chaotic region; Lyapunov exponent below", width: 760 },
+      { src: "/figures/foraging_agents.webp", dark: "/figures/foraging_agents_dark.webp", alt: "Three panels of 100 simulated foragers over 120 steps, green when at patch A, with the share at A above each: speckled and steady at beta 400, bursts at beta 1300, nobody moving at beta 2500", caption: "1,000 simulated foragers who share news by word of mouth; 100 of them shown, green when at patch A. As choices get sharper the crowd goes from steady to chaotic to frozen." },
+      { src: "/figures/foraging_bifurcation.webp", dark: "/figures/foraging_bifurcation_dark.webp", alt: "Bifurcation diagram: one branch splits in two, then period doubling leads into chaotic bands with periodic windows, which end in a period-4 cycle", caption: "Bifurcation diagram of the two-patch model with an infinite crowd: period doubling into chaos as β grows." },
     ],
   },
   {

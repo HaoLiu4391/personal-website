@@ -328,6 +328,31 @@ figure img {
   }
 }
 
+/* figures drawn for this site come in both palettes */
+figure .fig-dark {
+  display: none;
+}
+
+:root[data-theme="dark"] figure .fig-light {
+  display: none;
+}
+
+:root[data-theme="dark"] figure .fig-dark {
+  display: block;
+  opacity: 1;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) figure .fig-light {
+    display: none;
+  }
+
+  :root:not([data-theme="light"]) figure .fig-dark {
+    display: block;
+    opacity: 1;
+  }
+}
+
 figcaption {
   margin-top: 4px;
   font-size: 0.8125rem;
@@ -410,6 +435,14 @@ footer .source {
 
   figure img {
     opacity: 1 !important;
+  }
+
+  figure .fig-light {
+    display: block !important;
+  }
+
+  figure .fig-dark {
+    display: none !important;
   }
 }
 

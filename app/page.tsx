@@ -25,7 +25,8 @@ function ProjectItem({ p }: { p: Project }) {
   const figures = p.figures?.map((f) => (
     <figure key={f.src} style={f.width ? { maxWidth: f.width } : undefined}>
       <a href={`${BASE}${f.src}`}>
-        <img src={`${BASE}${f.src}`} alt={f.alt} loading="lazy" />
+        <img className={f.dark && "fig-light"} src={`${BASE}${f.src}`} alt={f.alt} loading="lazy" />
+        {f.dark && <img className="fig-dark" src={`${BASE}${f.dark}`} alt={f.alt} loading="lazy" />}
       </a>
       <figcaption>{f.caption}</figcaption>
     </figure>
