@@ -1,3 +1,4 @@
+import { Visitors } from "@/components/visitors";
 import { BASE, EDUCATION, INTRO, NEWS, PROJECTS, PUBLICATIONS, SITE, type Project } from "@/constants";
 import { Inline } from "@/lib/inline";
 
@@ -148,6 +149,8 @@ export default function Home() {
           ))}
         </ul>
       </section>
+
+      <Visitors />
     </main>
   );
 }

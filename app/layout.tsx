@@ -4,6 +4,7 @@ import type { PropsWithChildren } from "react";
 
 import { Footer, Header } from "@/components/site";
 import { siteConfig } from "@/config";
+import counter from "@/data/counter.json";
 
 import "./globals.css";
 
@@ -40,6 +41,14 @@ export default function RootLayout({ children }: PropsWithChildren) {
           {children}
           <Footer />
         </div>
+        {/* GoatCounter: counts page views without cookies; it skips localhost */}
+        {counter.goatcounter && (
+          <script
+            data-goatcounter={`https://${counter.goatcounter}.goatcounter.com/count`}
+            async
+            src="https://gc.zgo.at/count.js"
+          />
+        )}
       </body>
     </html>
   );

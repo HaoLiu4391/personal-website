@@ -197,6 +197,24 @@ export function Header() {
 const COMMIT = process.env.COMMIT ?? "";
 const UPDATED = process.env.UPDATED || SITE.updated;
 
+// Visits so far: the number counted at build time, replaced by GoatCounter's
+// public counter once it loads (that one is cached for up to four hours).
+export function VisitCount({ code, built, offset }: { code: string; built: number; offset: number }) {
+  const [n, setN] = useState(built);
+
+  useEffect(() => {
+    fetch(`https://${code}.goatcounter.com/counter/TOTAL.json`)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => {
+        const live = d ? Number(String(d.count).replace(/\D/g, "")) : 0;
+        if (live > 0) setN((b) => Math.max(b, live));
+      })
+      .catch(() => {});
+  }, [code]);
+
+  return <>{(n + offset).toLocaleString("en-US")}</>;
+}
+
 export function Footer() {
   return (
     <footer>
