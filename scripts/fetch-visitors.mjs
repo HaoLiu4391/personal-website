@@ -12,14 +12,17 @@ if (!cfg.goatcounter || !token) {
 }
 
 const api = `https://${cfg.goatcounter}.goatcounter.com/api/v0`;
+// The API wants whole hours; end at the next one so the current hour counts.
 const end = new Date();
-end.setUTCMinutes(0, 0, 0);
+end.setUTCHours(end.getUTCHours() + 1, 0, 0, 0);
 const range = `start=${cfg.start}T00:00:00Z&end=${end.toISOString().replace(".000", "")}`;
 
+// GoatCounter answers 404 while the range has no visits at all; read that as empty.
 async function get(path) {
   const r = await fetch(api + path, {
     headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
   });
+  if (r.status === 404) return {};
   if (!r.ok) throw new Error(`${path}: HTTP ${r.status}`);
   return r.json();
 }
