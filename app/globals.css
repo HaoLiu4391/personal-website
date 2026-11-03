@@ -427,7 +427,11 @@ footer .source {
 }
 
 .visitors p {
-  margin: 12px 0 0;
+  margin: 0 0 12px;
+}
+
+.visitors .where {
+  margin: 6px 0 0;
 }
 
 /* the keyboard hint means nothing on touch screens */
