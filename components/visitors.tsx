@@ -38,13 +38,15 @@ export function Visitors() {
   const [year, month] = counter.since.split("-").map(Number);
   const [y0, m0, d0] = counter.start.split("-").map(Number);
   const n = visitors.countries.length;
-  const mapped = visitors.total;
+  // the visits on the map; GoatCounter's own total for the range has come back 0 while
+  // the countries held visits, so it is not used here
+  const mapped = visitors.countries.reduce((s, c) => s + c.count, 0);
   const where = `${mapped} ${mapped === 1 ? "visit" : "visits"}, ${n} ${n === 1 ? "country" : "countries"}`;
 
   return (
     <section className="visitors" aria-label="Visitors">
       <p>
-        <VisitCount code={counter.goatcounter} built={visitors.total} offset={counter.offset} /> visits
+        <VisitCount code={counter.goatcounter} built={Math.max(visitors.total, mapped)} offset={counter.offset} /> visits
         since {MONTHS[month - 1]} {year}. Counted by <a href="https://www.goatcounter.com">GoatCounter</a>,
         no cookies.
       </p>
